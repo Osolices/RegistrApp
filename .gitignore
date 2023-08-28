@@ -30,6 +30,7 @@ log.txt
 /bazel-out
 
 # Node
+# Ignora la carpeta node_modules
 /node_modules
 npm-debug.log
 yarn-error.log
