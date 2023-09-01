@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard-alumnos',
@@ -7,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardAlumnosPage implements OnInit {
 
-  constructor() { }
+  constructor(private route: Router) { }
+
+  menuType: string = 'push';
+
+  logOut() {
+    this.route.navigate(['/login']);
+  }
 
   ngOnInit() {
   }
