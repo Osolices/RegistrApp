@@ -18,10 +18,12 @@ const routes: Routes = [
   {
     path: 'dashboard-alumnos',
     loadChildren: () => import('./pages/dashboard-alumnos/dashboard-alumnos.module').then( m => m.DashboardAlumnosPageModule)
-  },  {
+  },
+  {
     path: 'dashboard-profesor',
     loadChildren: () => import('./pages/dashboard-profesor/dashboard-profesor.module').then( m => m.DashboardProfesorPageModule)
   },
+  
 
 
 ];

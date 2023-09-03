@@ -7,9 +7,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardProfesorPage implements OnInit {
 
+
+  public clases = [
+    {
+      id:'1',
+      ramo:'Calidad de software'
+    },
+    {
+      id:'2',
+      ramo:'Diseño y prototipos'
+    },
+  ];
   constructor() { }
 
   ngOnInit() {
+    console.log(this.clases)
   }
 
 }
