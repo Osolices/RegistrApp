@@ -1,17 +1,54 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>docente</ion-title>
-  </ion-toolbar>
-</ion-header>
+  <ion-menu contentId="main-content">
+    <ion-header>
+      <ion-toolbar color="tertiary">
+        <ion-title>Menu Content</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-ramos">This is the menu content.</ion-content>
+  </ion-menu>
+  <div class="ion-page" id="main-content">
+    <ion-toolbar>
+      <ion-segment value="all">
+        <ion-segment-button value="lunes">
+          <ion-label>L</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="martes">
+          <ion-label>M</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="miercoles">
+          <ion-label>X</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="jueves">
+          <ion-label>J</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="viernes">
+          <ion-label>V</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="todos">
+          <ion-label>Todos</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+    <div class="ion-page" id="main-content"></div>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Bienvenido</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-ramos">
+      <ion-list class="ion-asignaturas">
+        <ion-item  *ngFor="let c of clases" [routerLink]="['/dashboard-profesor', c.id]">
+          <ion-avatar slot="end">
+            <ion-img src="../../../assets/icon/LogoRGAPP.png" ></ion-img>
+          </ion-avatar>
+          <ion-label> {{c.ramo}}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-content>   
+  </div>
 
-<ion-content >
-  <ion-list>
-    <ion-item *ngFor="let c of clases" [routerLink]="['/dashboard-profesor', c.id]">
-      <ion-avatar slot="end">
-        <ion-img src="../../../assets/icon/LogoRGAPP.png"></ion-img>
-      </ion-avatar>
-      <ion-label> {{c.ramo}}</ion-label>
-    </ion-item>
-  </ion-list>
+
   
-</ion-content>
