@@ -1,13 +1,13 @@
-  <ion-menu contentId="main-content">
-    <ion-header>
-      <ion-toolbar color="tertiary">
-        <ion-title>Menu Content</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content class="ion-ramos">This is the menu content.</ion-content>
-  </ion-menu>
-  <div class="ion-page" id="main-content">
-    <ion-toolbar>
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button auto-hide="false"></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="textoend">Bienvenido</ion-title>
+  </ion-toolbar>
+</ion-header>
+  <div class="ion-page" id= "barra-dias">
+    <ion-toolbar class="dias">
       <ion-segment value="all">
         <ion-segment-button value="lunes">
           <ion-label>L</ion-label>
@@ -38,9 +38,9 @@
         <ion-title>Bienvenido</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content class="ion-ramos">
+    <ion-content class="ramos">
       <ion-list class="ion-asignaturas">
-        <ion-item  *ngFor="let c of clases" [routerLink]="['/dashboard-profesor', c.id]">
+        <ion-item  class="asignatura" *ngFor="let c of clases" [routerLink]="['/dashboard-profesor', c.id]">
           <ion-avatar slot="end">
             <ion-img src="../../../assets/icon/LogoRGAPP.png" ></ion-img>
           </ion-avatar>

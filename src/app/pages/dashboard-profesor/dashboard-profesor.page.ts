@@ -17,6 +17,14 @@ export class DashboardProfesorPage implements OnInit {
       id:'2',
       ramo:'Diseño y prototipos'
     },
+    {
+      id:'3',
+      ramo:'Arquitectura'
+    },
+    {
+      id:'4',
+      ramo:'Fé cristiana'
+    },
   ];
   constructor() { }
 
