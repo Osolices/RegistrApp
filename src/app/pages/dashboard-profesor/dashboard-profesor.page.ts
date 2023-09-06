@@ -9,8 +9,6 @@ import { IonSegment } from '@ionic/angular';
 })
 export class DashboardProfesorPage implements OnInit {
 
-  
-
   public clases = [
     {
       id:'1',
@@ -35,13 +33,26 @@ export class DashboardProfesorPage implements OnInit {
       profesor: 'Segundo Díaz',
       horario: 'jueves',
       ramo:'Fé cristiana'
-    },
+    }
   ];
 
-  
 
-  constructor(private route: Router) { }
-  menuType: string = 'push';
+  constructor(private route: Router ) { }
+
+   menuType: string = 'push';
+   
+    //listar
+  getClases(){
+    return [...this.clases]
+  }
+
+  //filtro
+  filtroLunes(clasesID: string){
+    this.clases = this.clases.filter(c=> {
+      return c.horario == 'lunes'
+
+    })
+  }
   
 
   logOut() {
