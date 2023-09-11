@@ -1,14 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Cursos } from 'src/app/interfaces/cursos';
+
 
 @Component({
   selector: 'app-dashboard-alumnos',
   templateUrl: './dashboard-alumnos.page.html',
   styleUrls: ['./dashboard-alumnos.page.scss'],
 })
+
+
 export class DashboardAlumnosPage implements OnInit {
 
-  cards = [
+  cursos: Cursos[] = [
     {
       title: 'Card 1',
       subtitle: 'Subtitle 1',
@@ -26,6 +30,11 @@ export class DashboardAlumnosPage implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  toggleCard(curso: Cursos) {
+    console.log('Clicked!'); // Esta línea imprimirá 'Clicked!' en la consola cuando hagas clic en el icono
+    curso.expanded = !curso.expanded;
   }
 
 }

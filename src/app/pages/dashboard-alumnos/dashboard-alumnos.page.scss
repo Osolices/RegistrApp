@@ -32,20 +32,13 @@ ion-card {
       }
     }
     
-    .star-icon {
-      position: absolute;
-      right: 10px;
-      top: 10px;
-      color: green; // Reemplaza '#your-color' con el color que desees para la estrella
-    }
-  
-    .expand-icon {
-      position: absolute;
-      right: 10px;
-      bottom: 10px;
-  
-      &:active + .card-content ion-card-content .extra-info {
-        display: block;
-      }
-    }
-  }
+}
+.expand-icon {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    z-index: 1;
+    right: 20px;
+    bottom: 20px;
+    color: red; // Cambia 'red' al color que prefieras
+}
