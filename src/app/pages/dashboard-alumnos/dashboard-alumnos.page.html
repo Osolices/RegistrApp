@@ -31,7 +31,7 @@
 <!--Carta-->
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let curso of cursos; let i = index" detail button (click)="curso.expanded = !curso.expanded">
+    <ion-item *ngFor="let curso of cursos; let i = index" lines="none" detail="false" button (click)="curso.expanded = !curso.expanded">
       <ion-card>
         <div class="card-content">
           <div class="color-line" style=" background-color: {{curso.color}};"></div>
@@ -42,17 +42,24 @@
           <ion-card-content>
             <!-- Aquí es donde aplicamos el estilo condicional -->
             <p [ngStyle]="{'color': curso.porcentaje > 75 ? 'green' : 'red'}">Porcentaje de asistencia {{curso.porcentaje}}%</p>
-
+            
+            <!-- Aquí es donde aplicamos la directiva *ngIf -->
+            <ion-img *ngIf="!curso.expanded" src="./../../../assets/img/flecha.png" class="flecha"></ion-img>
+            
             <div *ngIf="curso.expanded">
               <ion-list>
                 Ultimas dos clases:
               </ion-list>
-              <ion-list>
+              <ion-list class="asis">
                 {{curso.asistencia1}}
               </ion-list>
-              <ion-list>
+              <ion-list class="asis">
                 {{curso.asistencia2}}
               </ion-list>
+
+                <ion-img *ngIf="curso.expanded" src="./../../../assets/img/flecha2.png" class="flecha"></ion-img>
+
+              
             </div>
           </ion-card-content>
         </div>
@@ -60,6 +67,8 @@
     </ion-item>
   </ion-list>
 </ion-content>
+
+
 
   <!--Carta-->
 
