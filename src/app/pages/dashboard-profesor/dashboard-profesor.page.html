@@ -53,19 +53,26 @@
         <ion-segment-button value="todos">
           <ion-label>Todos los cursos</ion-label>
         </ion-segment-button>
+        
       </ion-segment>
     </ion-toolbar>
   </ion-header>
 
-  <!--lista de ramos-->
-  <ion-content class="ramos">
-    <ion-list class="ion-asignaturas">
-      <ion-item  class="asignatura" *ngFor="let c of clases" [routerLink]="['/dashboard-profesor', c.id]">
-        <ion-avatar slot="end">
-          <ion-img src="../../../assets/icon/LogoRGAPP.png" ></ion-img>
-        </ion-avatar>
-        <ion-label> {{c.ramo}}</ion-label>
-      </ion-item>
-    </ion-list>
-  </ion-content>    
+  <ion-content>
+    <ion-card *ngFor="let c of clases"  [routerLink]="['/dashboard-profesor', c.id]">
+
+      <div class="card-content">
+        <div class="color-line"></div>
+        <ion-card-header>
+          <ion-card-title>{{c.ramo}}</ion-card-title>
+        </ion-card-header>
+      </div>
+      
+      <ion-icon name="qr-code-outline" class="qr-code-outline"></ion-icon>
+      
+      
+      
+    </ion-card>
+  </ion-content>
+
   

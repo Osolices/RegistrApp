@@ -41,19 +41,6 @@ export class DashboardProfesorPage implements OnInit {
 
    menuType: string = 'push';
    
-    //listar
-  getClases(){
-    return [...this.clases]
-  }
-
-  //filtro
-  filtroLunes(clasesID: string){
-    this.clases = this.clases.filter(c=> {
-      return c.horario == 'lunes'
-
-    })
-  }
-  
 
   logOut() {
     this.route.navigate(['/login']);

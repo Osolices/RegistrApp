@@ -1,13 +1,31 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>detalleramo</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">detalleramo</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <ion-card >
+    <div class="card-content">
+      <div class="color-line"></div>
+      <ion-card-header>
+        <ion-card-title>Detalle ramo</ion-card-title>
+      </ion-card-header>
+    </div>
+  </ion-card>
+  <table class="table">
+    <thead class="filas">
+      <tr>
+        <th scope="col">N°</th>
+        <th scope="col">Nombre alumno</th>
+        <th scope="col">Presente</th>
+        <th scope="col">Ausente</th>
+        <th scope="col">Justitificado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let a of Alumnos">
+        <th scope="row">{{a.id}}</th>
+        <td>{{a.nombre}} {{a.apellido}}</td>
+        <td><ion-checkbox></ion-checkbox></td>
+        <td><ion-checkbox></ion-checkbox></td>
+        <td><ion-checkbox></ion-checkbox></td>
+      </tr>
+  </table>
 </ion-content>
+
+
