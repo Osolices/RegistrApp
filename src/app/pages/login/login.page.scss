@@ -20,11 +20,14 @@ p {
 }
 
 .carta{
-    width: 90%;
+    width: 80%;
     margin: auto;
 
     @media screen and (min-width: 768px) {
-        width: 30%;
+        width: 70%;
+    }
+    @media screen and (min-width: 1000px) {
+        width: 40%;
     }
 }
 
@@ -34,6 +37,12 @@ p {
     align-items: center;
     justify-content: center;
     @media screen and (min-width: 768px) {
+        margin-top: 7em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    @media screen and (min-width: 1000px) {
         margin-top: 10em;
         display: flex;
         align-items: center;
@@ -41,6 +50,10 @@ p {
     }
 }
 .correo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.icono{
     width: 3em;
-    margin-left: 9em;
 }
