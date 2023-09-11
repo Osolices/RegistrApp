@@ -26,7 +26,7 @@ export class LoginPage implements OnInit {
     if (this.usuario.includes(this.profesor) && this.pass =="12345" ){
       console.log('Redirigiendo a /dashboard-profesor');
       this.router.navigate(['/dashboard-profesor'])
-    } else if (this.usuario.includes(this.alumno) && this.pass =="6789" ){
+    } else if (this.usuario.includes(this.alumno) && this.pass =="12345" ){
       console.log('Redirigiendo a /dashboard-alumno');
       this.router.navigate(['/dashboard-alumno'])
     } else{
