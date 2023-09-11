@@ -7,13 +7,11 @@
 
     <ion-card-content>
       <ion-item>
-        <ion-label position="floating">Correo Institucional</ion-label>
-        <ion-input [(ngModel)]="usuario" type="text"></ion-input>
+        <ion-input label="Correo Institucional" labelPlacement="floating" [(ngModel)]="usuario" type="text"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label position="floating">Contraseña</ion-label>
-        <ion-input [(ngModel)]="pass" type="password"></ion-input>
+        <ion-input label="Contraseña" labelPlacement="floating" [(ngModel)]="pass" type="password"></ion-input>
       </ion-item>
 
       <ion-button expand="full" color="primary" (click)="irMenu()">Entrar</ion-button>
