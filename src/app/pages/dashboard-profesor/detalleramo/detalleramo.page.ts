@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-detalleramo',
@@ -8,9 +10,56 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DetalleramoPage implements OnInit {
 
-  constructor() { }
+  public Alumnos=[
+    {
+      id:'200045009',
+      nombre: 'Camila',
+      apellido:'Rumino'
+    },
+    {
+      id:'199029812',
+      nombre: 'Guillermo',
+      apellido:'Lourdes'
+    },
+    {
+      id:'200045009',
+      nombre: 'Camila',
+      apellido:'Rumino'
+    },
+    {
+      id:'200045009',
+      nombre: 'Camila',
+      apellido:'Rumino'
+    },
+    {
+      id:'200045009',
+      nombre: 'Camila',
+      apellido:'Rumino'
+    },
+    {
+      id:'200045009',
+      nombre: 'Camila',
+      apellido:'Rumino'
+    },
+    {
+      id:'200045009',
+      nombre: 'Camila',
+      apellido:'Rumino'
+    },
+    {
+      id:'200045009',
+      nombre: 'Camila',
+      apellido:'Rumino'
+    }
+  ]
+
+
+  constructor( ) { }
+
+   
 
   ngOnInit() {
+    console.log(this.Alumnos)
   }
 
 }
