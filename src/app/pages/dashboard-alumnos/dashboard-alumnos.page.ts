@@ -16,8 +16,7 @@ export class DashboardAlumnosPage implements OnInit {
     {
       title: 'Card 1',
       subtitle: 'Subtitle 1',
-      extraInfo: 'Extra info 1',
-      expanded: false
+      extraInfo: 'Extra info 1'
     },
     // ... más tarjetas aquí
   ];
@@ -30,11 +29,6 @@ export class DashboardAlumnosPage implements OnInit {
   }
 
   ngOnInit() {
-  }
-
-  toggleCard(curso: Cursos) {
-    console.log('Clicked!'); // Esta línea imprimirá 'Clicked!' en la consola cuando hagas clic en el icono
-    curso.expanded = !curso.expanded;
   }
 
 }
