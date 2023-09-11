@@ -1,6 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
 ion-card {
-    margin: 10px;
     position: relative;
+    width: 100%;
+    margin: 10px auto; 
+    font-family: 'Montserrat', sans-serif;
+
     
     .card-content {
       position: relative;
@@ -12,7 +17,6 @@ ion-card {
         top: 0;
         bottom: 0;
         width: 5px;
-        background-color: green; // Reemplaza '#your-color' con el color que desees para la línea
       }
       
       ion-card-header {
@@ -25,20 +29,7 @@ ion-card {
       ion-card-content {
         color: gray;
         font-size: 16px;
-  
-        .extra-info {
-          display: none;
-        }
       }
     }
     
-}
-.expand-icon {
-    position: absolute;
-    right: 10px;
-    bottom: 10px;
-    z-index: 1;
-    right: 20px;
-    bottom: 20px;
-    color: red; // Cambia 'red' al color que prefieras
 }

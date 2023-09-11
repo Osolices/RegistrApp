@@ -30,39 +30,37 @@
 
 <!--Carta-->
 <ion-content>
-  <ion-card *ngFor="let curso of cursos">
-    <div class="card-content">
-      <div class="color-line"></div>
-      <ion-card-header>
-        <ion-card-title>{{curso.title}}</ion-card-title>
-      </ion-card-header>
+  <ion-list>
+    <ion-item *ngFor="let curso of cursos; let i = index" detail button (click)="curso.expanded = !curso.expanded">
+      <ion-card>
+        <div class="card-content">
+          <div class="color-line" style=" background-color: {{curso.color}};"></div>
+          <ion-card-header>
+            <ion-card-title>{{curso.title}}</ion-card-title>
+          </ion-card-header>
 
-      <ion-card-content>
-        {{curso.subtitle}}
+          <ion-card-content>
+            <!-- Aquí es donde aplicamos el estilo condicional -->
+            <p [ngStyle]="{'color': curso.porcentaje > 75 ? 'green' : 'red'}">Porcentaje de asistencia {{curso.porcentaje}}%</p>
 
-        <p class="d-inline-flex gap-1">
-          <a class="btn btn-primary" data-bs-toggle="collapse" href="#multiCollapseExample1" 
-          role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Toggle first element</a>
-        </p>
-
-        <div class="row">
-          <div class="col">
-            <div class="collapse multi-collapse" id="multiCollapseExample1">
-              <div class="card card-body">
-                Some placeholder content for the first collapse component of this multi-collapse example. This panel is hidden by default but revealed when the user activates the relevant trigger.
-              </div>
+            <div *ngIf="curso.expanded">
+              <ion-list>
+                Ultimas dos clases:
+              </ion-list>
+              <ion-list>
+                {{curso.asistencia1}}
+              </ion-list>
+              <ion-list>
+                {{curso.asistencia2}}
+              </ion-list>
             </div>
-          </div>
-          
+          </ion-card-content>
         </div>
-        
-          {{curso.extraInfo}}
-
-      </ion-card-content>
-    </div>
-    <ion-icon name="chevron-down-circle-outline" class="expand-icon"></ion-icon>
-  </ion-card>
+      </ion-card>
+    </ion-item>
+  </ion-list>
 </ion-content>
+
   <!--Carta-->
 
 </div>

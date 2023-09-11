@@ -8,12 +8,13 @@ import { DashboardAlumnosPageRoutingModule } from './dashboard-alumnos-routing.m
 
 import { DashboardAlumnosPage } from './dashboard-alumnos.page';
 
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    DashboardAlumnosPageRoutingModule
+    DashboardAlumnosPageRoutingModule,
   ],
   declarations: [DashboardAlumnosPage]
 })
