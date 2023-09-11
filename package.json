@@ -67,5 +67,9 @@
     "ts-node": "^8.3.0",
     "typescript": "~5.0.2"
   },
-  "description": "An Ionic project"
+  "description": "An Ionic project",
+  "config":{
+    "ionic_sass":"./sass.config.js"
+  }
+
 }

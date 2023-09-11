@@ -29,24 +29,32 @@
   </ion-header>
 
 <!--Carta-->
-  <<ion-content>
-    <ion-card *ngFor="let card of cards">
-      <div class="card-content">
-        <div class="color-line"></div>
-        <ion-card-header>
-          <ion-card-title>{{card.title}}</ion-card-title>
-        </ion-card-header>
-  
-        <ion-card-content>
-          {{card.subtitle}}
-          <div *ngIf="card.expanded" class="extra-info">
-            {{card.extraInfo}}
-          </div>
-        </ion-card-content>
-      </div>
-      <ion-icon name="star" class="star-icon"></ion-icon>
-      <ion-icon name="arrow-dropdown" class="expand-icon" (click)="card.expanded = !card.expanded"></ion-icon>
-    </ion-card>
-  </ion-content>
+<ion-content>
+  <ion-card *ngFor="let curso of cursos">
+    <div class="card-content">
+      <div class="color-line"></div>
+      <ion-card-header>
+        <ion-card-title>{{curso.title}}</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        {{curso.subtitle}}
+        <div *ngIf="curso.expanded" class="extra-info">
+          {{curso.extraInfo}}
+        </div>
+      </ion-card-content>
+    </div>
+    <ion-icon name="chevron-down-circle-outline" class="expand-icon" (click)="toggleCard(curso)"></ion-icon>
+  </ion-card>
+</ion-content>
   <!--Carta-->
+
+  <div class="card" style="width: 18rem;">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+  </div>
 </div>
