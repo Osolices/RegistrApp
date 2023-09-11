@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
-
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-detalleramo',
@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./detalleramo.page.scss'],
 })
 export class DetalleramoPage implements OnInit {
+  
+
 
   public Alumnos=[
     {
@@ -52,7 +54,6 @@ export class DetalleramoPage implements OnInit {
       apellido:'Rumino'
     }
   ]
-
 
   constructor( ) { }
 

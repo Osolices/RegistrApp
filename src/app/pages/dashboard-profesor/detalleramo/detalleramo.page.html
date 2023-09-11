@@ -3,29 +3,38 @@
     <div class="card-content">
       <div class="color-line"></div>
       <ion-card-header>
-        <ion-card-title>Detalle ramo</ion-card-title>
+        <ion-card-title>Calidad de software</ion-card-title>
+      <div>
+        <ion-label>13/Septiembre/2023</ion-label>
+      </div>
       </ion-card-header>
     </div>
   </ion-card>
-  <table class="table">
-    <thead class="filas">
-      <tr>
-        <th scope="col">N°</th>
-        <th scope="col">Nombre alumno</th>
-        <th scope="col">Presente</th>
-        <th scope="col">Ausente</th>
-        <th scope="col">Justitificado</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let a of Alumnos">
-        <th scope="row">{{a.id}}</th>
-        <td>{{a.nombre}} {{a.apellido}}</td>
-        <td><ion-checkbox></ion-checkbox></td>
-        <td><ion-checkbox></ion-checkbox></td>
-        <td><ion-checkbox></ion-checkbox></td>
-      </tr>
-  </table>
+  <button type="button" class="btn btn-outline-white"><ion-icon name="chevron-back-outline" style="border: 1px"></ion-icon></button>
+  <div class="tabla" style="border: 30px solid white">
+    <table class="table"  style="border: 1px solid black;" >
+      <thead class="filas">
+        <tr>
+          <th scope="col"style="border: 1px solid black;">N°</th>
+          <th scope="col" style="border: 1px solid black;">Nombre alumno</th>
+          <th scope="col" style="border: 1px solid black;text-align: center;">Presente</th>
+          <th scope="col" style="border: 1px solid black;text-align: center;">Ausente</th>
+          <th scope="col" style="border: 1px solid black;text-align: center;">Justitificado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let a of Alumnos">
+          <th scope="row">{{a.id}}</th>
+          <td style="border: 1px solid black;">{{a.nombre}} {{a.apellido}}</td>
+          <td style="border: 1px solid black;text-align: center;"><ion-checkbox></ion-checkbox></td>
+          <td style="border: 1px solid black;text-align: center;"><ion-checkbox></ion-checkbox></td>
+          <td style="border: 1px solid black;text-align: center;"><ion-checkbox></ion-checkbox></td>
+        </tr>
+    </table>
+    <div class="d-grid gap-2 col-2 mx-auto">
+      <button class="btn btn-primary" type="button">Finalizar</button>
+    </div>
+  </div>
 </ion-content>
 
 
