@@ -1,5 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+.botonqr{
+    margin: auto;
+}
+.qr{
+    width: 3em;
+}
 ion-card {
     position: relative;
     width: 100%;
@@ -40,4 +52,7 @@ ion-card {
     .asis{
         margin-left: 10em;
     }
+      
 }
+
+  
