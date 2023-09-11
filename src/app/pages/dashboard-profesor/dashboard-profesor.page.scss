@@ -17,16 +17,49 @@ ion-card-content {
     align-items: center;
     text-align: center;
 }
-.ramos{
-    display: flex;
-    align-items: center;
-    text-align: center;
-    --padding-start: 350px;
-    --padding-end: 350px;
-    --padding-top: 20px;
-}
-.asignatura{
-    --background: rgb(167, 161, 161);
-    --border-radius: 10px;
-    padding-top: 8px;
-}
+
+
+ion-card {
+    margin: 15px;
+    position: relative;
+    
+    
+    
+    
+    .card-content {
+      position: relative;
+      padding-left: 10px;
+      
+      .color-line {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 5px;
+        background-color: green; // Reemplaza '#your-color' con el color que desees para la línea
+      }
+      
+      ion-card-header {
+        ion-card-title {
+          color: black;
+          font-size: 20px;
+        }
+      }
+  
+      ion-card-content {
+        color: gray;
+        font-size: 16px;
+  
+        .extra-info {
+          display: none;
+        }
+      }
+    }
+    
+    .qr-code-outline {
+      position: absolute;
+      right: 25px;
+      top: 25px;
+      color: black; // Reemplaza '#your-color' con el color que desees para la estrella
+    }
+  }
