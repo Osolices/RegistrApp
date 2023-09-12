@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
-
 .flex-container {
     display: flex;
     justify-content: space-between;
@@ -10,7 +9,8 @@
     margin: auto;
 }
 .qr{
-    width: 3em;
+  margin: auto;
+  width: 4em;
 }
 ion-card {
     position: relative;
@@ -45,9 +45,10 @@ ion-card {
     }
     .flecha{
         width: 2em;
-        margin-bottom: -20px;
+        margin-top: -2px;
         margin-left: auto;
         margin-right: auto;
+        margin-bottom: -2px;
     }
     .asis{
         margin-left: 10em;

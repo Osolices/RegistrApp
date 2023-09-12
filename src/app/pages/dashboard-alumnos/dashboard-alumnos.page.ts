@@ -41,15 +41,19 @@ export class DashboardAlumnosPage implements OnInit {
     // ... puedes agregar más cursos aquí
   ];
   
-  constructor(private route: Router) { }
+  constructor(private router: Router) { }
 
   menuType: string = 'push';
 
   logOut() {
-    this.route.navigate(['/login']);
+    this.router.navigate(['/login']);
   }
 
   ngOnInit() {
+  }
+
+  irQR(){
+    this.router.navigate(['/qrpage'])
   }
 
 }

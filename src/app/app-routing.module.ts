@@ -22,7 +22,11 @@ const routes: Routes = [
   {
     path: 'splash',
     loadChildren: () => import('./pages/splash/splash.module').then( m => m.SplashPageModule)
+  },  {
+    path: 'qrpage',
+    loadChildren: () => import('./pages/qrpage/qrpage.module').then( m => m.QrpagePageModule)
   },
+
 
   
 
