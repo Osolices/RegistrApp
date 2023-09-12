@@ -1,3 +1,15 @@
 .fondo{
-    --background: url('../../../assets/img/fondoqr.png') 0/100% 100%;
+  --background: rgb(11,72,113);
+    background: url('../../../assets/img/fondoqr.png') 0/100% 100%;
   }
+.cabecera{
+  --background: rgba(248,179,28,1);
+}
+.contedenor{
+  width: 90%;
+  display: flex;
+  justify-content: center;
+}
+.lector{
+  margin-top: 10em;
+}
