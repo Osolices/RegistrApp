@@ -2,13 +2,16 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonSegment } from '@ionic/angular';
 
+
 @Component({
   selector: 'app-dashboard-profesor',
   templateUrl: './dashboard-profesor.page.html',
   styleUrls: ['./dashboard-profesor.page.scss'],
 })
 export class DashboardProfesorPage implements OnInit {
-
+  
+  selectedDay: string = 'todos';
+  
   public clases = [
     {
       id:'1',
@@ -18,26 +21,26 @@ export class DashboardProfesorPage implements OnInit {
     },
     {
       id:'2',
-      profesor: 'Andrés Polo',
+      profesor: 'Víctor Andrade',
       horario: 'martes',
       ramo:'Diseño y prototipos'
     },
     {
       id:'3',
-      profesor: 'Jaqueline Duarte',
+      profesor: 'Víctor Andrade',
       horario: 'miercoles',
       ramo:'Arquitectura'
     },
     {
       id:'4',
-      profesor: 'Segundo Díaz',
-      horario: 'jueves',
-      ramo:'Fé cristiana'
+      profesor: 'Víctor Andrade',
+      horario: 'martes',
+      ramo:'Base de Datos'
     }
   ];
 
 
-  constructor(private route: Router ) { }
+  constructor(private route: Router) { }
 
    menuType: string = 'push';
    
@@ -48,9 +51,10 @@ export class DashboardProfesorPage implements OnInit {
 
   ngOnInit() {
     console.log(this.clases)
-   
   }
- 
+  updateDay(event: any) {
+    this.selectedDay = event.detail.value;
+  }
 
 }
 

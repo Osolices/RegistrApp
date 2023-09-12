@@ -17,7 +17,7 @@ const routes: Routes = [
     loadChildren: () => import('./qr/qr.module').then( m => m.QrPageModule)
   },
   {
-    path: ':clasesID',
+    path: 'detalleramo/:ramo',
     loadChildren: () => import('./detalleramo/detalleramo.module').then( m => m.DetalleramoPageModule)
   }
 ];

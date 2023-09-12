@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
-import { DatePipe } from '@angular/common';
+import { Clases } from 'src/app/interfaces/clases';
+
+
 
 @Component({
   selector: 'app-detalleramo',
@@ -10,57 +12,61 @@ import { DatePipe } from '@angular/common';
 })
 export class DetalleramoPage implements OnInit {
   
-
-
-  public Alumnos=[
+  ramo: string='';
+  selectedRow: any = { estado: false };
+  
+  clases: Clases[] = [
     {
-      id:'200045009',
-      nombre: 'Camila',
-      apellido:'Rumino'
+      id: 1,
+      fecha: "21/09/2023",
+      estado: true
     },
     {
-      id:'199029812',
-      nombre: 'Guillermo',
-      apellido:'Lourdes'
+      id: 2,
+      fecha: "28/09/2023",
+      estado: true
     },
     {
-      id:'200045009',
-      nombre: 'Camila',
-      apellido:'Rumino'
+      id: 3,
+      fecha: "05/10/2023",
+      estado: true
     },
     {
-      id:'200045009',
-      nombre: 'Camila',
-      apellido:'Rumino'
+      id: 4,
+      fecha: "12/10/2023",
+      estado: true
     },
     {
-      id:'200045009',
-      nombre: 'Camila',
-      apellido:'Rumino'
+      id: 5,
+      fecha: "19/10/2023",
+      estado: true
     },
     {
-      id:'200045009',
-      nombre: 'Camila',
-      apellido:'Rumino'
-    },
-    {
-      id:'200045009',
-      nombre: 'Camila',
-      apellido:'Rumino'
-    },
-    {
-      id:'200045009',
-      nombre: 'Camila',
-      apellido:'Rumino'
+      id: 6,
+      fecha: "26/10/2023",
+      estado: false
     }
-  ]
+  ];
 
-  constructor( ) { }
-
+  constructor(private route: ActivatedRoute,
+              private router: Router) { }
+   
+  menuType: string = 'push';
    
 
+  logOut() {
+    this.router.navigate(['/login']);
+  }
+
   ngOnInit() {
-    console.log(this.Alumnos)
+    this.route.params.subscribe(params => {
+      console.log(params);  // Imprime todos los parámetros de la ruta
+      this.ramo = params['ramo'];
+    });
+  }
+  selectRow(clase : any) {
+    this.selectedRow = clase;
+    console.log(clase); // Aquí puedes manejar la fila seleccionada
   }
 
 }
