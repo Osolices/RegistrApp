@@ -1,6 +1,6 @@
 
 <!--Sidemenu-->
-<ion-menu [type]="menuType" contentId="main-content">
+<ion-menu [type]="menuType" contentId="main-content" class="menu">
   <ion-header>
     <ion-toolbar>
       <ion-title>Menú</ion-title>
@@ -63,7 +63,7 @@
               </div>
             </ion-card-content>
           </div>
-          <ion-button *ngIf="!curso.expanded" class="botonqr" fill="clear">
+          <ion-button *ngIf="!curso.expanded" class="botonqr" fill="clear" (click)="irQR()">
             <img src="./../../../assets/img/qr.png" class="qr">
           </ion-button>
         </div>
