@@ -1,13 +1,41 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>qr</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+<!--Sidemenu-->
+<ion-menu [type]="menuType" contentId="main-content">
+  <ion-header>
     <ion-toolbar>
-      <ion-title size="large">qr</ion-title>
+      <ion-title>Menú</ion-title>
+    </ion-toolbar>
+
+  </ion-header>
+
+  <ion-content class="ion-padding">
+    <ion-button fill="clear" class="boton-menu">Ajustes 
+      <ion-icon name="settings-outline"></ion-icon>
+    </ion-button>
+    <ion-button fill="clear"class="boton-menu"(click)="logOut()"> Cerrar sesión
+      <ion-icon name="log-out-outline"></ion-icon>
+    </ion-button>
+  </ion-content>
+</ion-menu>
+
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button autoHide="false"></ion-menu-button>
+      </ion-buttons>
+      <div class="botonback">
+        <ion-back-button defaultHref="/ruta-pagina-anterior" class="botonb"></ion-back-button>
+      </div>
     </ion-toolbar>
   </ion-header>
-</ion-content>
+ <ion-card >
+    <div class="card-content">
+      <div class="color-line"></div>
+      <ion-card-header>
+        <ion-card-title>{{ramo}}</ion-card-title>
+      <div>
+        <ion-label>13/Septiembre/2023</ion-label>
+      </div>
+      </ion-card-header>
+    </div>
+  </ion-card>

@@ -58,6 +58,10 @@ export class DetalleramoPage implements OnInit {
     this.router.navigate(['/login']);
   }
 
+  IrAqr(){
+    this.router.navigate(['/qr']);
+  }
+
   ngOnInit() {
     this.route.params.subscribe(params => {
       console.log(params);  // Imprime todos los parámetros de la ruta

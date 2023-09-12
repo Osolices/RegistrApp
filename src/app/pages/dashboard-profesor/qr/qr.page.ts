@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+import { Clases } from 'src/app/interfaces/clases';
 
 @Component({
   selector: 'app-qr',
@@ -7,8 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QrPage implements OnInit {
 
-  constructor() { }
+  constructor(private route: ActivatedRoute,
+    private router: Router) { }
 
+    menuType: string = 'push';
+
+    ramo: string='';
+    selectedRow: any = { estado: false };
+
+  logOut() {
+    this.router.navigate(['/login']);
+  }
   ngOnInit() {
   }
 

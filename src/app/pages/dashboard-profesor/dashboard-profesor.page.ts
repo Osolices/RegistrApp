@@ -14,28 +14,67 @@ export class DashboardProfesorPage implements OnInit {
   
   public clases = [
     {
-      id:'1',
       profesor: 'Víctor Andrade',
-      horario: 'lunes',
-      ramo:'Calidad de software'
+      dias: 'lunes',
+      bloque: '8:30-9:40',
+      ramo:'Calidad de software',
+      seccion:'005D'
     },
     {
-      id:'2',
       profesor: 'Víctor Andrade',
-      horario: 'martes',
-      ramo:'Diseño y prototipos'
+      dias: 'martes',
+      bloque: '8:30-9:40',
+      ramo:'Diseño y prototipos',
+      seccion:'001D'
     },
     {
-      id:'3',
       profesor: 'Víctor Andrade',
-      horario: 'miercoles',
-      ramo:'Arquitectura'
+      dias: 'miercoles',
+      bloque: '10:40-12:50',
+      ramo:'Arquitectura',
+      seccion:'004D'
     },
     {
-      id:'4',
       profesor: 'Víctor Andrade',
-      horario: 'martes',
-      ramo:'Base de Datos'
+      dias: 'martes',
+      bloque: '10:00-12:50',
+      ramo:'Base de Datos',
+      seccion:'004D'
+    },
+    {
+      profesor: 'Víctor Andrade',
+      dias: 'lunes',
+      bloque: '10:00-12:50',
+      ramo:'Calidad de software',
+      seccion:'007D'
+    },
+    {
+      profesor: 'Víctor Andrade',
+      dias:'miercoles',
+      bloque: '11:30-12:50',
+      ramo:'Arquitectura',
+      seccion:'005D'
+    },
+    {
+      profesor: 'Víctor Andrade',
+      dias: 'jueves',
+      bloque: '8:30-11:20',
+      ramo:'Arquitectura',
+      seccion:'006D'
+    },
+    {
+      profesor: 'Víctor Andrade',
+      dias: 'viernes',
+      bloque: '10:00-12:50',
+      ramo:'Base de Datos',
+      seccion:'004D'
+    },
+    {
+      profesor: 'Víctor Andrade',
+      dias: 'jueves',
+      bloque: '13:00-14:20',
+      ramo:'Calidad de software',
+      seccion:'005D'
     }
   ];
 

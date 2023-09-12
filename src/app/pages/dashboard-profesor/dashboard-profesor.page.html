@@ -25,7 +25,7 @@
       <ion-buttons slot="start">
         <ion-menu-button autoHide="false"></ion-menu-button>
       </ion-buttons>
-      <ion-title slot="end">Bienvenido</ion-title>
+      <ion-title slot="end"> Bienvenido: Profesor</ion-title>
     </ion-toolbar>
     <ion-toolbar class="dias">
       <ion-segment value="todos" (ionChange)="updateDay($event)">
@@ -64,12 +64,14 @@
 
   <ion-content>
     <ng-template ngFor let-c [ngForOf]="clases">
-      <ion-card [routerLink]="['/dashboard-profesor/detalleramo', c.ramo]" *ngIf="selectedDay === 'todos' || c.horario === selectedDay">
+      <ion-card [routerLink]="['/dashboard-profesor/detalleramo', c.ramo]" *ngIf="selectedDay === 'todos' || c.dias === selectedDay">
 
         <div class="card-content">
           <div class="color-line"></div>
           <ion-card-header>
             <ion-card-title>{{c.ramo}}</ion-card-title>
+            <ion-label>{{c.bloque}}</ion-label>
+            <ion-label><h5>{{c.seccion}}</h5></ion-label>
           </ion-card-header>
         </div>
 

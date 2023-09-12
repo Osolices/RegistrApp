@@ -59,7 +59,7 @@
       </ion-grid>
     </div>
     <div class="boton">
-      <ion-button class="botonqr" expand="full" [disabled]="selectedRow.estado">
+      <ion-button (click)="IrAqr()" class="botonqr" expand="full" [disabled]="selectedRow.estado" >
         <img src="../../../../assets/img/qr.png" class="icono">
         Generar QR
       </ion-button>
