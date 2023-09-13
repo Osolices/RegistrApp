@@ -1,69 +1,106 @@
+<ion-content class="fondo">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-<div class="navbar">
-  
+
+  <div class="navbar">
+
     <nav class="navbar navbar-dark bg-dark fixed-top">
-
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#"><img src="../../../../assets/img/Logo1.png"  width="70em" height="70em" style="margin-bottom: 20px; margin-top: -15px;"></a>
+    
+      <div class="container-fluid" >
+        <ion-back-button defaultHref="/" style="margin-bottom: 40px; color: white;" class="botonn"></ion-back-button>
+        <a class="navbar-brand" href="/dashboard-profesor"><img src="../../../../assets/img/Logo1.png"  width="70em" height="70em" style="margin-bottom: 20px; margin-top: -15px;"></a>
+        
         <button style="margin-bottom: 20px; margin-top: -15px;" class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         
         <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
           <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Dark offcanvas</h5>
+            <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">RegistrApp</h5>
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
           <div class="offcanvas-body">
             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <ion-button fill="clear">
+                 <a class="nav-link active" href="/dashboard-profesor">Home</a>
+                </ion-button>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <ion-button fill="clear">
+                  <a class="nav-link active" href="/dashboard-profesor">Ajustes</a>
+                </ion-button>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown
-                </a>
-                <ul class="dropdown-menu dropdown-menu-dark">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li>
-                    <hr class="dropdown-divider">
-                  </li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
+              <li class="nav-item">
+                <ion-button fill="clear" (click)="logOut()" >
+                  <a class="nav-link active">Log Out</a>
+                </ion-button>
               </li>
             </ul>
-            <form class="d-flex mt-3" role="search">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-success" type="submit">Search</button>
-            </form>
+    
           </div>
         </div>
       </div>
     </nav>
+    </div>
+
+
+  <div class="cartas">
+ <ion-card >
+  <div class="card-content">
+    <div class="color-line"></div>
+    <ion-card-header>
+      <ion-card-title>{{ramo}}</ion-card-title>
+    <div>
+      <ion-label>13/Septiembre/2023</ion-label>
+    </div>
+    </ion-card-header>
+  </div>
+</ion-card>
+</div>
+
+<div class="qr">
+  <img class="imgqr" src="./../../../../assets/img/qr-code.png" alt="">
+
+  <div class="tabla">
+    <ion-grid>
+      <ion-row class="titulos">
+        <ion-col class="titulos" >Estudiantes Presentes</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <div *ngFor="let e of estudiantes; let i = index">
+            <div *ngIf="i < 15">{{e.nombre}}</div>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div *ngFor="let e of estudiantes; let i = index">
+            <div *ngIf="i >= 15">{{e.nombre}}</div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <div class="anuncio">
+      <ion-item>La lista termina en 20 min</ion-item>
+    </div>
+    
+    <div class="timer">
+      <progress value="{{time}}" max="100">{{time}}</progress>
+    </div>
+    
   </div>
 
+  
+  
+</div>
+<div class="boton">
+  <button class="button is-medium is-responsive is-primary botonqr" expand="full" (click)="irDash()">
+    <img src="../../../../assets/img/finalizar.png" class="icono">
+    Finalizar
+  </button>
+</div>
 
 
-
-
-
-
-
-
- <ion-card >
-    <div class="card-content">
-      <div class="color-line"></div>
-      <ion-card-header>
-        <ion-card-title>{{ramo}}</ion-card-title>
-      <div>
-        <ion-label>13/Septiembre/2023</ion-label>
-      </div>
-      </ion-card-header>
-    </div>
-  </ion-card>
+</ion-content>

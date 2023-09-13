@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { Clases } from 'src/app/interfaces/clases';
-
+import * as bootstrap from 'bootstrap';
 
 
 @Component({
@@ -51,15 +51,14 @@ export class DetalleramoPage implements OnInit {
   constructor(private route: ActivatedRoute,
               private router: Router) { }
    
-  menuType: string = 'push';
-   
+  
 
   logOut() {
     this.router.navigate(['/login']);
   }
 
   IrAqr(){
-    this.router.navigate(['/qr']);
+    this.router.navigate(['dashboard-profesor/qr']);
   }
 
   ngOnInit() {
@@ -71,6 +70,14 @@ export class DetalleramoPage implements OnInit {
   selectRow(clase : any) {
     this.selectedRow = clase;
     console.log(clase); // Aquí puedes manejar la fila seleccionada
+  }
+  ngAfterViewInit() {
+    let element = document.getElementById('navbarToggleExternalContent');
+    if (element) {
+      let bsCollapse = new bootstrap.Collapse(element, {
+        toggle: false
+      });
+    }
   }
 
 }

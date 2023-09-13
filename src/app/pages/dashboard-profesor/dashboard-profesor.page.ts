@@ -82,8 +82,6 @@ export class DashboardProfesorPage implements OnInit {
 
   constructor(private route: Router) { }
 
-   menuType: string = 'push';
-   
 
   logOut() {
     this.route.navigate(['/login']);

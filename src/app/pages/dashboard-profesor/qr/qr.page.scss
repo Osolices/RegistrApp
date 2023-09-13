@@ -11,6 +11,26 @@
 .fondo{
   --background: #003357 !important;
 }
+
+.button{
+  background-color: #fff0 !important;
+}
+
+.fondoQr{
+  margin: auto;
+  --background: #003357 !important;
+}
+
+.imgqr{
+  margin-left: 20px;
+  width: 40%;
+  height: 40%;
+  border: solid 4px #f8b31c;
+}
+
+.cartas{
+  margin-top: 60px;
+}
 ion-card {
     margin: 15px;
     position: relative;
@@ -43,58 +63,76 @@ ion-card {
     
 
   }
-  .tabla {
+  .qr {
+    display: flex;
+    justify-content: space-between;
+  
+    .imgqr {
+      width: 40%;
+      height: auto;
+    }
+  
+    .tabla {
+      width: 60%;
+  
+      ion-grid {
+        ion-col{
+          border: solid 1px black;
+        }
+        ion-row {
+          display: flex;
+          justify-content: space-between;
+          border: solid 1px black;
+          background-color: #ffffff;
+          color: #000000;
+        }
+        ion-row.titulos{
+          background-color:  #3a5c84;
+          color: #fff;
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  .boton{
     display: flex;
     justify-content: center;
     align-items: center;
     margin: auto;
-    width: 90%;
+}
 
-  }
-
-  
-  
-
-  ion-col {
-    border: solid 1px #000000;
-    text-align: center;
-  }
-   
-  ion-row{
-    background-color: #ffffff;
-    color: #000000;
-    border: solid 1px #000000;
-  }
-  ion-row.titulos{
-    background-color:  #272696;
-    color: #fff;
-  }
-  ion-row.selected {
-    color: #000000;
-    background-color: #559fe9 !important; /* Cambia esto al color que prefieras */
-  }
   .icono{
     width: 3em;
     margin-left: -2em;
     margin-right: 1em;
   }
 
-.boton{
+.timer{
     display: flex;
     justify-content: center;
     align-items: center;
     margin: auto;
 }
-  .botonqr{
-    width: 30%;
-    margin-top: 2em;
-    --background: rgba(248,179,28,1);
-  }
-  .botonreporte{
-    width: 30%;
-    margin-top: 2em;
-    --background: rgb(18, 109, 170);
-  }
-  .botonback{
-    width: 2em;
-  }
+.timer progress{
+  height: 80px;
+  width: 90%;
+  color: #f8b31c;
+}
+
+.anuncio{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+
+.botonqr{
+  width: 30%;
+  height: 60px;
+  margin-top: 2em;
+  background: #f8b31c !important;
+  border-radius: 5%;
+  font-size: large;
+}

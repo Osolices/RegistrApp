@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Cursos } from 'src/app/interfaces/cursos';
-
+import * as bootstrap from 'bootstrap';
 
 
 @Component({
@@ -43,7 +43,16 @@ export class DashboardAlumnosPage implements OnInit {
   
   constructor(private router: Router) { }
 
-  menuType: string = 'push';
+  
+
+  ngAfterViewInit() {
+    let element = document.getElementById('navbarToggleExternalContent');
+    if (element) {
+      let bsCollapse = new bootstrap.Collapse(element, {
+        toggle: false
+      });
+    }
+  }
 
   logOut() {
     this.router.navigate(['/login']);

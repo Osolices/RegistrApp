@@ -1,0 +1,51 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
+
+.navbar{
+  margin: auto;
+  background-color: #1c4369 !important;
+}
+
+.offcanvas{
+  background-color: #3a5c84 !important;
+}
+
+.fondo{
+  --background: #003357 !important;
+}
+.button{
+  background-color: #fff0 !important;
+}
+
+.tabla {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: 90%;
+    border: solid 5px #f8b31c;
+
+  }
+th{
+    background-color:  #3a5c84;
+    color: #fff;
+}
+.contenedor{
+    margin-top: 100px;
+
+}
+.boton{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  margin-bottom: 100px;
+}
+.botonqr{
+  width: 30%;
+  height: 60px;
+  margin-top: 2em;
+  background: #f8b31c !important;
+  border-radius: 5%;
+  font-size: large;
+}
