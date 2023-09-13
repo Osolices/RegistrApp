@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonSegment } from '@ionic/angular';
-
+import * as bootstrap from 'bootstrap';
 
 @Component({
   selector: 'app-dashboard-profesor',
@@ -82,6 +82,14 @@ export class DashboardProfesorPage implements OnInit {
 
   constructor(private route: Router) { }
 
+  ngAfterViewInit() {
+    let element = document.getElementById('navbarToggleExternalContent');
+    if (element) {
+      let bsCollapse = new bootstrap.Collapse(element, {
+        toggle: false
+      });
+    }
+  }
 
   logOut() {
     this.route.navigate(['/login']);

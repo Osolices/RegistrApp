@@ -26,6 +26,10 @@ const routes: Routes = [
     path: 'qrpage',
     loadChildren: () => import('./pages/qrpage/qrpage.module').then( m => m.QrpagePageModule)
   },
+  {
+    path: 'ajustes',
+    loadChildren: () => import('./pages/ajustes/ajustes.module').then( m => m.AjustesPageModule)
+  },
 
 
   
