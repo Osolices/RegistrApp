@@ -59,6 +59,12 @@ export class DashboardAlumnosPage implements OnInit {
   }
 
   ngOnInit() {
+    let element = document.getElementById('navbarToggleExternalContent');
+    if (element) {
+      let bsCollapse = new bootstrap.Collapse(element, {
+        toggle: false
+      });
+    }
   }
 
   irQR(){

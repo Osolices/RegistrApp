@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { Clases } from 'src/app/interfaces/clases';
 import * as bootstrap from 'bootstrap';
+import { AlertController, ToastController } from '@ionic/angular';
 
 
 @Component({
@@ -49,7 +50,8 @@ export class DetalleramoPage implements OnInit {
   ];
 
   constructor(private route: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              private alertController: AlertController, private toastController: ToastController) { }
    
   
 
@@ -78,6 +80,32 @@ export class DetalleramoPage implements OnInit {
         toggle: false
       });
     }
+  }
+  async generarReporte() {
+    const alert = await this.alertController.create({
+      header: 'Descargar Reporte',
+      inputs: [
+        // Aquí puedes agregar los campos de tu formulario
+      ],
+      buttons: [
+        {
+          text: 'Descargar',
+          handler: () => {
+            this.descargarReporte();
+          }
+        }
+      ]
+    });
+  
+    await alert.present();
+  }
+
+  async descargarReporte() {
+    const toast = await this.toastController.create({
+      message: 'Reporte descargado',
+      duration: 2000
+    });
+    toast.present();
   }
 
 }

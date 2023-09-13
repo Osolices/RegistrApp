@@ -1,12 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 @import "~bootstrap/dist/css/bootstrap.css";
+
 .navbar{
-  margin-bottom: 60px;
+  margin: auto;
   background-color: #1c4369 !important;
 }
 
 .offcanvas{
-  background-color: #007ea8 !important;
+  background-color: #3a5c84 !important;
 }
 
 .fondo{
@@ -35,13 +36,13 @@ ion-card {
     width: 100%;
     margin: 10px auto; 
     font-family: 'Montserrat', sans-serif;
-    --background: #53adda !important;
+ 
     
     
     .card-content {
       position: relative;
       padding-left: 10px;
-      --background: #53adda;
+      
       
       .color-line {
         position: absolute;
@@ -53,7 +54,7 @@ ion-card {
       
       ion-card-header {
         ion-card-title {
-          color: white;
+          color: rgb(0, 0, 0);
           font-size: 20px;
         }
       }
@@ -78,8 +79,10 @@ ion-card {
 
 }
 
-.list-md {
-  background: #53adda !important;
+.contenedor{
+  margin-top: 50px;
 }
+
+
 
   
