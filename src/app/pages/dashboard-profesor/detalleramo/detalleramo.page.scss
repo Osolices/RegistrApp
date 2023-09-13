@@ -1,3 +1,21 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+.navbar{
+  margin: auto;
+  background-color: #1c4369 !important;
+}
+
+.offcanvas{
+  background-color: #3a5c84 !important;
+}
+
+.fondo{
+  --background: #003357 !important;
+}
+.cartas{
+  margin-top: 60px;
+}
+
+
 ion-card {
     margin: 15px;
     position: relative;
@@ -85,3 +103,4 @@ ion-card {
   .botonback{
     width: 2em;
   }
+  

@@ -1,21 +1,36 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+.navbar{
+  margin: auto;
+  background-color: #1c4369 !important;
+}
+
+.offcanvas{
+  background-color: #3a5c84 !important;
+}
+
+.fondo{
+  --background: #003357 !important;
+}
 ion-avatar {
     --border-radius: 4px;
   }
-ion-segment {
-    --background: rgb(233, 229, 229);
+ion-segment-button {
+    --background: #f8b31c !important;
   }
+
 ion-card-content {
     text-align: justify;
 }
 .textoend {
     display: flex;
-    align-items: end;
+    align-items: flex-end;
     text-align: end;
 }
 .dias{
     display: flex;
     align-items: center;
     text-align: center;
+    
 }
 
 

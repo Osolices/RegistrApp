@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { Clases } from 'src/app/interfaces/clases';
+import * as bootstrap from 'bootstrap';
 
 @Component({
   selector: 'app-qr',
@@ -18,6 +19,14 @@ export class QrPage implements OnInit {
     ramo: string='';
     selectedRow: any = { estado: false };
 
+    ngAfterViewInit() {
+      let element = document.getElementById('navbarToggleExternalContent');
+      if (element) {
+        let bsCollapse = new bootstrap.Collapse(element, {
+          toggle: false
+        });
+      }
+    }
   logOut() {
     this.router.navigate(['/login']);
   }

@@ -1,22 +1,48 @@
+<ion-content class="fondo">
 
 <!--Sidemenu-->
-<ion-menu [type]="menuType" contentId="main-content">
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>Menú</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+<div class="navbar">
 
-  <ion-content class="ion-padding">
-    <ion-button fill="clear" class="boton-menu">Ajustes 
-      <ion-icon name="settings-outline"></ion-icon>
-    </ion-button>
-    <ion-button fill="clear"class="boton-menu"(click)="logOut()"> Cerrar sesión
-      <ion-icon name="log-out-outline"></ion-icon>
-    </ion-button>
-  </ion-content>
+<nav class="navbar navbar-dark bg-dark fixed-top">
 
-</ion-menu>
+  <div class="container-fluid" >
+    <a class="navbar-brand" href="#"><img src="../../../../assets/img/Logo1.png"  width="65em" height="65em" style="margin-bottom: 20px; margin-top: -15px;"></a>
+    <ion-title slot="end" style="font-size: medium;"> Bienvenido: Profesor {{profesor}}</ion-title>
+    <button style="margin-bottom: 20px; margin-top: -15px;" class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">RegistrApp</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <li class="nav-item">
+            <ion-button fill="clear">
+             <a class="nav-link active" href="/dashboard-profesor">Home</a>
+            </ion-button>
+          </li>
+          <li class="nav-item">
+            <ion-button fill="clear">
+              <a class="nav-link active" href="/dashboard-profesor">Ajustes</a>
+            </ion-button>
+          </li>
+          <li class="nav-item">
+            <ion-button fill="clear" (click)="logOut()" >
+              <a class="nav-link active">Log Out</a>
+            </ion-button>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+</nav>
+</div>
 
 <!--Dashboard-->
 <div class="ion-page" id="main-content">
@@ -25,7 +51,7 @@
       <ion-buttons slot="start">
         <ion-menu-button autoHide="false"></ion-menu-button>
       </ion-buttons>
-      <ion-title slot="end"> Bienvenido: Profesor</ion-title>
+      
     </ion-toolbar>
     <ion-toolbar class="dias">
       <ion-segment value="todos" (ionChange)="updateDay($event)">
@@ -62,7 +88,7 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-content>
+  <ion-content class="fondo">
     <ng-template ngFor let-c [ngForOf]="clases">
       <ion-card [routerLink]="['/dashboard-profesor/detalleramo', c.ramo]" *ngIf="selectedDay === 'todos' || c.dias === selectedDay">
 
@@ -84,3 +110,4 @@
 
 
   
+</ion-content>

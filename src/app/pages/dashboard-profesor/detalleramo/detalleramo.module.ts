@@ -14,6 +14,7 @@ import { DetalleramoPage } from './detalleramo.page';
     FormsModule,
     IonicModule,
     DetalleramoPageRoutingModule
+    
   ],
   declarations: [DetalleramoPage]
 })

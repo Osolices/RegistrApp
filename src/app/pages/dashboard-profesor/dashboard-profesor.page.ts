@@ -11,6 +11,7 @@ import { IonSegment } from '@ionic/angular';
 export class DashboardProfesorPage implements OnInit {
   
   selectedDay: string = 'todos';
+  profesor: string = 'Victor Falso';
   
   public clases = [
     {
