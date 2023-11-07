@@ -27,21 +27,22 @@ async login(){
   // Redirigir al usuario a la página correspondiente
   if (this.usuario.includes(this.profesor)) {
       // Autenticación con el servidor
-      this.http.post('http://127.0.0.1:8000/profesores/', {correo: this.usuario, pass: this.pass}).subscribe(async (resp:any) => {
+      this.http.get('http://osolices.pythonanywhere.com/profesores/', {params: {correo: this.usuario, pass_field: this.pass}}).subscribe(async (resp:any) => {
           if (resp && resp.token) {
               // Almacenar el token en el almacenamiento local del dispositivo
-              window.localStorage.setItem('userToken', resp.token);
-              console.log('Redirigiendo a /dashboard-profesor');
-              this.router.navigate(['/dashboard-profesor']);
+            window.localStorage.setItem('userToken', resp.token);
+            console.log('Redirigiendo a /dashboard-profesor');
+            this.router.navigate(['/dashboard-profesor']);
           } else {
               this.mostrarAlerta();
           }
       });
   } else if (this.usuario.includes(this.alumno)) {
-      this.http.post('http://osolices.pythonanywhere.com/alumnos/', {correo: this.usuario, pass: this.pass}).subscribe(async (resp:any) => {
+      this.http.get('http://osolices.pythonanywhere.com/alumnos/', {params: {correo: this.usuario, pass_field: this.pass}}).subscribe(async (resp:any) => {
           if (resp && resp.token) {
-              console.log('Redirigiendo a /dashboard-alumno');
-              this.router.navigate(['/dashboard-alumnos']);
+            window.localStorage.setItem('userToken', resp.token);
+            console.log('Redirigiendo a /dashboard-alumno');
+            this.router.navigate(['/dashboard-alumnos']);
           } else {
               this.mostrarAlerta();
           }
