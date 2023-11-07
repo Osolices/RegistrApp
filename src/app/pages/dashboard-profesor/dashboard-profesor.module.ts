@@ -8,6 +8,7 @@ import { DashboardProfesorPageRoutingModule } from './dashboard-profesor-routing
 
 import { DashboardProfesorPage } from './dashboard-profesor.page';
 import { Component } from 'ionicons/dist/types/stencil-public-runtime';
+import { NavbarComponent } from 'src/app/componentes/navbar/navbar.component';
 
 @NgModule({
   imports: [
@@ -16,6 +17,6 @@ import { Component } from 'ionicons/dist/types/stencil-public-runtime';
     IonicModule,
     DashboardProfesorPageRoutingModule
   ],
-  declarations: [DashboardProfesorPage]
+  declarations: [DashboardProfesorPage,NavbarComponent]
 })
 export class DashboardProfesorPageModule {}
