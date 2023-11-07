@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
-
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -12,31 +12,53 @@ export class LoginPage implements OnInit {
   
   usuario: string='';
   pass: string='';
-  profesor: string='@profesor.duoc.cl';
+  profesor: string='@profesorduoc.cl';
   alumno: string='@duoc.cl';
   constructor(private router: Router,
-              private toastCtrl: ToastController) { }
+              private toastCtrl: ToastController,
+              private http: HttpClient) { }
 
-  ngOnInit() {
-  }
+ngOnInit() {
+}
+async login(){
+  console.log(`Usuario: ${this.usuario}`);
+  console.log(`Contraseña: ${this.pass}`);
 
-  async irMenu(){
-    console.log(`Usuario: ${this.usuario}`);
-    console.log(`Contraseña: ${this.pass}`);
-    if (this.usuario.includes(this.profesor) && this.pass =="12345" ){
-      console.log('Redirigiendo a /dashboard-profesor');
-      this.router.navigate(['/dashboard-profesor'])
-    } else if (this.usuario.includes(this.alumno) && this.pass =="12345" ){
-      console.log('Redirigiendo a /dashboard-alumno');
-      this.router.navigate(['/dashboard-alumnos'])
-    } else{
-      console.log('Mostrando alerta');
-      let alerta = this.toastCtrl.create({
-        message: "Usuario o contraseña incorrecto",
-        duration: 2000,
-        position: 'bottom'
+  // Redirigir al usuario a la página correspondiente
+  if (this.usuario.includes(this.profesor)) {
+      // Autenticación con el servidor
+      this.http.post('http://127.0.0.1:8000/profesores/', {correo: this.usuario, pass: this.pass}).subscribe(async (resp:any) => {
+          if (resp && resp.token) {
+              // Almacenar el token en el almacenamiento local del dispositivo
+              window.localStorage.setItem('userToken', resp.token);
+              console.log('Redirigiendo a /dashboard-profesor');
+              this.router.navigate(['/dashboard-profesor']);
+          } else {
+              this.mostrarAlerta();
+          }
       });
-      (await alerta).present();
-    }
+  } else if (this.usuario.includes(this.alumno)) {
+      this.http.post('http://osolices.pythonanywhere.com/alumnos/', {correo: this.usuario, pass: this.pass}).subscribe(async (resp:any) => {
+          if (resp && resp.token) {
+              console.log('Redirigiendo a /dashboard-alumno');
+              this.router.navigate(['/dashboard-alumnos']);
+          } else {
+              this.mostrarAlerta();
+          }
+      });
+  } else {
+      this.mostrarAlerta();
   }
+}
+
+async mostrarAlerta() {
+  console.log('Mostrando alerta');
+  let alerta = this.toastCtrl.create({
+      message: "Usuario o contraseña incorrecto",
+      duration: 2000,
+      position: 'bottom'
+  });
+  (await alerta).present();
+}
+
 }
