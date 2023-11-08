@@ -13,11 +13,11 @@ const routes: Routes = [
     loadChildren: () => import('./asistencia/asistencia.module').then( m => m.AsistenciaPageModule)
   },
   {
-    path: 'qr/:ramo',
+    path: 'qr/:descripcion/:nombre/:salaId/:fecha/:descripcion/:id_seccion',
     loadChildren: () => import('./qr/qr.module').then( m => m.QrPageModule)
   },
   {
-    path: 'detalleramo/:ramo',
+    path: 'detalleramo/:descripcion/:nombre/:horario/:id_seccion/:salaId',
     loadChildren: () => import('./detalleramo/detalleramo.module').then( m => m.DetalleramoPageModule)
   }
 ];

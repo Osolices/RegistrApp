@@ -26,18 +26,22 @@ ion-item {
   }
 .botonqr{
     margin: auto;
+    flex: 0 0 70px; // Esto dará al botón un ancho fijo de 50px
 }
 .qr{
   margin: auto;
-  width: 4em;
+  width: 50px;
+  min-width: 50px;
 }
 ion-card {
     position: relative;
     width: 100%;
     margin: 10px auto; 
     font-family: 'Montserrat', sans-serif;
- 
-    
+  
+    .seccion{
+      margin-left: 20px;
+    }
     
     .card-content {
       position: relative;
@@ -56,7 +60,10 @@ ion-card {
         ion-card-title {
           color: rgb(0, 0, 0);
           font-size: 20px;
+          flex: 1 0 auto;
+          
         }
+       
       }
   
       ion-card-content {

@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
-import { Clases } from 'src/app/interfaces/clases';
 import * as bootstrap from 'bootstrap';
 import { AlertController, ToastController } from '@ionic/angular';
-
+import { HttpClient } from '@angular/common/http';
+import { AuthServiceService } from './../../../auth-service.service';
 
 @Component({
   selector: 'app-detalleramo',
@@ -12,72 +12,55 @@ import { AlertController, ToastController } from '@ionic/angular';
   styleUrls: ['./detalleramo.page.scss'],
 })
 export class DetalleramoPage implements OnInit {
-  
-  ramo: string='';
+  secciones: any[] = [];
+  descripcion: string = '';
+  nombre: string = '';
+  horario: string = '';
   selectedRow: any = { estado: false };
-  
-  clases: Clases[] = [
-    {
-      id: 1,
-      fecha: "21/09/2023",
-      estado: true
-    },
-    {
-      id: 2,
-      fecha: "28/09/2023",
-      estado: true
-    },
-    {
-      id: 3,
-      fecha: "05/10/2023",
-      estado: true
-    },
-    {
-      id: 4,
-      fecha: "12/10/2023",
-      estado: true
-    },
-    {
-      id: 5,
-      fecha: "19/10/2023",
-      estado: true
-    },
-    {
-      id: 6,
-      fecha: "26/10/2023",
-      estado: false
-    }
-  ];
+  fecha: string = '';
+  id_seccion: number = 0;
+  salaId: number = 0;
 
-  constructor(private route: ActivatedRoute,
-              private router: Router,
-              private alertController: AlertController, private toastController: ToastController) { }
-   
-  
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private alertController: AlertController,
+    private toastController: ToastController,
+    private http: HttpClient,
+    private authService: AuthServiceService,
+    private cd: ChangeDetectorRef
+  ) {} // Inyecta el ChangeDetectorRef en el constructor
 
   logOut() {
+    this.authService.logout(); // Llama al método logout de AuthServiceService aquí
     this.router.navigate(['/login']);
   }
 
-  IrAqr(){
+  IrAqr() {
     this.router.navigate(['dashboard-profesor/qr']);
   }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      console.log(params);  // Imprime todos los parámetros de la ruta
-      this.ramo = params['ramo'];
+    this.route.params.subscribe((params) => {
+      console.log(params); // Imprime todos los parámetros de la ruta
+      this.descripcion = params['descripcion'];
+      this.nombre = params['nombre'];
+      this.horario = params['horario'];
+      this.fecha = this.getCurrentDate();
+      this.id_seccion = params['id_seccion'];
+      this.getClasessProfesor(this.id_seccion);
+      this.salaId = params['salaId'];
     });
   }
-  selectRow(clase : any) {
-    this.selectedRow = clase;
-    console.log(clase); // Aquí puedes manejar la fila seleccionada
+  selectRow(seccion: any) {
+    this.selectedRow = seccion;
+    console.log(seccion); // Aquí puedes manejar la fila seleccionada
   }
   ngAfterViewInit() {
     let element = document.getElementById('navbarToggleExternalContent');
     if (element) {
       let bsCollapse = new bootstrap.Collapse(element, {
-        toggle: false
+        toggle: false,
       });
     }
   }
@@ -92,20 +75,57 @@ export class DetalleramoPage implements OnInit {
           text: 'Descargar',
           handler: () => {
             this.descargarReporte();
-          }
-        }
-      ]
+          },
+        },
+      ],
     });
-  
+
     await alert.present();
   }
 
   async descargarReporte() {
     const toast = await this.toastController.create({
       message: 'Reporte descargado',
-      duration: 2000
+      duration: 2000,
     });
     toast.present();
   }
 
+  getCurrentDate(): string {
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    const yyyy = today.getFullYear();
+
+    return `${yyyy}-${mm}-${dd}`;
+  }
+
+  getClasessProfesor(id_seccion: number) {
+    const userData = window.localStorage.getItem('userData');
+
+    if (userData) {
+      console.log(id_seccion);
+      this.http
+        .get(`https://osolices.pythonanywhere.com/clases/`)
+        .subscribe((dataClases: any) => {
+          console.log(dataClases);
+          if (dataClases) {
+            const secciones: any[] = [];
+            dataClases.forEach((clase: any) => {
+              if (Number(clase.id_seccion) === Number(id_seccion)) {
+                secciones.push(clase);
+              }
+            });
+            // Ordena las secciones por la propiedad fecha
+            secciones.sort(
+              (a, b) =>
+                new Date(a.fecha).getTime() - new Date(b.fecha).getTime()
+            );
+            console.log(secciones);
+            this.secciones = secciones; // Asigna el array secciones a la propiedad secciones de la clase
+            this.cd.detectChanges(); // Llama al método detectChanges() para actualizar la vista
+          }
+        });
+    }
+  }
 }
