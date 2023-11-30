@@ -22,22 +22,23 @@ export class QrPage implements OnInit, OnDestroy {
   qrUrl: string='';
 
   public estudiantes = [
-    { nombre: 'Juan Andrade' },
-    { nombre: 'María González' },
-    { nombre: 'Carlos Pérez' },
-    { nombre: 'Ana Martínez' },
-    { nombre: 'Luis Rodríguez' },
-    { nombre: 'Sofía García' },
-    { nombre: 'Antonio López' },
-    { nombre: 'Patricia Torres' },
-    { nombre: 'Ricardo Ramírez' },
-    { nombre: 'Isabel Castro' },
-    { nombre: 'Javier Morales' },
-    { nombre: 'Teresa Guzmán' },
-    { nombre: 'José Herrera' },
-    { nombre: 'Carmen Peña' },
-    { nombre: 'Francisco Díaz' },
-  ];
+    { rut: '0123456789', nombre: 'Ricardo Silva' },
+    { rut: '0901234568', nombre: 'Jorge Perez' },
+    { rut: '1012345678', nombre: 'Veronica Rios' },
+    { rut: '1012345679', nombre: 'Sandra Gomez' },
+    { rut: '1123456789', nombre: 'Pablo Herrera' },
+    { rut: '2123456789', nombre: 'Mauricio Figueroa' },
+    { rut: '2123456790', nombre: 'Roberto Rodriguez' },
+    { rut: '2234567890', nombre: 'Daniela Torres' },
+    { rut: '3234567890', nombre: 'Carolina Vasquez' },
+    { rut: '3234567901', nombre: 'Susana Vargas' },
+    { rut: '3345678901', nombre: 'Javier Jara' },
+    { rut: '4345678901', nombre: 'Felipe Espinoza' },
+    { rut: '4345679012', nombre: 'Ricardo Herrera' },
+    { rut: '4456789012', nombre: 'Gabriel Castillo' },
+    { rut: '5456789012', nombre: 'Claudia Contreras' }
+];
+
 
   constructor(
     private route: ActivatedRoute,
@@ -78,8 +79,8 @@ export class QrPage implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.pauseTimer();
   }
-  irDash() {
-    this.router.navigateByUrl('/dashboard-profesor/asistencia', {
+  irDash(fecha: string, id_seccion: number) {
+    this.router.navigateByUrl(`/dashboard-profesor/asistencia/${fecha}/${id_seccion}`, {
       state: { estudiantes: this.estudiantes },
     });
   }
@@ -93,17 +94,38 @@ export class QrPage implements OnInit, OnDestroy {
   pauseTimer() {
     window.clearInterval(this.intervalId);
   }
-
-  generarQr(descripcion: string, nombre: string, id_seccion: number, salaId: number, fecha: string) {
-    let qrData = {
-      descripcion: descripcion,
-      nombre: nombre,
-      id_seccion: id_seccion,
-      salaId: salaId,
-      fecha: fecha
-    };
-    this.qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=800x800&data=${encodeURIComponent(JSON.stringify(qrData))}`;
-  }
+  ubicacionActual(){
+    return new Promise<{lat: number, lon: number}>((resolve, reject) => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+          resolve({
+            lat: position.coords.latitude,
+            lon: position.coords.longitude
+          });
+        }, (error) => {
+          reject('Error al obtener la ubicación');
+        });
+      } else {
+        reject('Geolocalización no es soportada por este navegador');
+      }
+    });
+  };
   
-
+  async generarQr(descripcion: string, nombre: string, id_seccion: number, salaId: number, fecha: string) {
+    try {
+      const coords = await this.ubicacionActual();
+      let qrData = {
+        descripcion: descripcion,
+        nombre: nombre,
+        id_seccion: id_seccion,
+        salaId: salaId,
+        fecha: fecha,
+        latitud: coords.lat,
+        longitud: coords.lon
+      };
+      this.qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=800x800&data=${encodeURIComponent(JSON.stringify(qrData))}`;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }

@@ -17,8 +17,24 @@ export class QrpagePage implements OnInit {
     }, 3000);
   }
   
-
+  ubicacionActual(){
+    return new Promise<{lat: number, lon: number}>((resolve, reject) => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+          resolve({
+            lat: position.coords.latitude,
+            lon: position.coords.longitude
+          });
+        }, (error) => {
+          reject('Error al obtener la ubicación');
+        });
+      } else {
+        reject('Geolocalización no es soportada por este navegador');
+      }
+    });
+  };
   ngOnInit() {
   }
+  
 
 }

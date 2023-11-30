@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { AuthServiceService } from './../../auth-service.service';
+import { Http } from '@capacitor-community/http';
 
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
@@ -30,12 +31,18 @@ export class LoginPage implements OnInit {
 
 
   async login() {
+    // Verificar si los campos están vacíos
+    if (!this.usuario || !this.pass) {
+      this.mostrarAlerta('Campos vacíos');
+      return;
+    }
+  
     console.log(`Usuario: ${this.usuario}`);
     console.log(`Contraseña: ${this.pass}`);
   
     // Autenticación con el servidor
     this.http
-      .post('http://osolices.pythonanywhere.com/login/', {
+      .post('https://osolices.pythonanywhere.com/login/', {
         correo: this.usuario,
         pass_field: this.pass,
       })
@@ -43,7 +50,7 @@ export class LoginPage implements OnInit {
         catchError(error => {
           if (error.status === 404) {
             // Muestra la alerta de usuario incorrecto
-            this.mostrarAlerta();
+            this.mostrarAlerta('Usuario o contraseña incorrecto');
           }
           return throwError(error);
         })
@@ -62,20 +69,21 @@ export class LoginPage implements OnInit {
             this.router.navigate(['/dashboard-alumnos']);
           }
         } else {
-          this.mostrarAlerta();
+          this.mostrarAlerta('Usuario o contraseña incorrecto');
         }
       });
   }
   
 
+  
 
-  async mostrarAlerta() {
+  async mostrarAlerta(mensaje: string) {
     console.log('Mostrando alerta');
     let alerta = this.toastCtrl.create({
-      message: 'Usuario o contraseña incorrecto',
+      message: mensaje,
       duration: 2000,
       position: 'bottom',
     });
     (await alerta).present();
   }
-}
+}  

@@ -4,6 +4,7 @@ import { Cursos } from 'src/app/interfaces/cursos';
 import * as bootstrap from 'bootstrap';
 import { HttpClient } from '@angular/common/http';
 import { AuthServiceService } from './../../auth-service.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard-alumnos',
@@ -18,10 +19,10 @@ export class DashboardAlumnosPage implements OnInit {
 
   getAsignaturasEstudiante() {
     const userData = window.localStorage.getItem('userData');
-
+  
     if (userData) {
       const rut = JSON.parse(userData).rut_alumno;
-
+  
       this.http
         .get(`https://osolices.pythonanywhere.com/alumno_seccion/?rut=${rut}`)
         .subscribe((data: any) => {
@@ -29,20 +30,21 @@ export class DashboardAlumnosPage implements OnInit {
             data.forEach(
               (item: { id_seccion: number; id_asignatura: string }) => {
                 const seccion = item.id_seccion;
-
+  
                 console.log(seccion);
-
+  
                 this.http
                   .get(
                     `https://osolices.pythonanywhere.com/secciones/${seccion}`
                   )
-                  .subscribe((data: any) => {
-                    const asignatura = data.id_asignatura;
-                    this.secciones.push(data);
-                    console.log(data);
-
+                  .subscribe((seccionData: any) => {
+                    const asignatura = seccionData.id_asignatura;
+                    const seccionObj = {...seccionData}; // Crea un nuevo objeto para cada sección
+                    this.secciones.push(seccionObj);
+                    console.log(seccionObj);
+  
                     const asignaturaId = asignatura.split('/').slice(-2, -1)[0]; // Extrae el ID de la asignatura de la URL
-
+  
                     this.http
                       .get(
                         `https://osolices.pythonanywhere.com/asignaturas/${asignaturaId}`
@@ -51,10 +53,10 @@ export class DashboardAlumnosPage implements OnInit {
                         const nombre = asignaturaData.nombre;
                         const color = asignaturaData.color;
                         console.log(color);
-                        data.nombre = nombre;
-                        data.color = color.toLowerCase(); // Almacena el color en el objeto de sección
-                        console.log(data);
-
+                        seccionObj.nombre = nombre;
+                        seccionObj.color = color.toLowerCase(); // Almacena el color en el objeto de sección
+                        console.log(seccionObj);
+  
                         this.http
                           .get(
                             `https://osolices.pythonanywhere.com/asistencias/?rut=${rut}&seccion=${seccion}`
@@ -68,11 +70,10 @@ export class DashboardAlumnosPage implements OnInit {
                                 new Date(b.fecha).getTime() -
                                 new Date(a.fecha).getTime()
                             );
-                            
-
+  
                             // Obtiene las dos fechas más recientes
-                            data.date1 = asistenciasOrdenadas[0]?.fecha;
-                            data.date2 = asistenciasOrdenadas[1]?.fecha;
+                            seccionObj.date1 = asistenciasOrdenadas[0]?.fecha;
+                            seccionObj.date2 = asistenciasOrdenadas[1]?.fecha;
                           });
                       });
                   });
@@ -82,17 +83,7 @@ export class DashboardAlumnosPage implements OnInit {
         });
     }
   }
-
-  ngAfterViewInit() {
-    let element = document.getElementById('navbarToggleExternalContent');
-    if (element) {
-      let bsCollapse = new bootstrap.Collapse(element, {
-        toggle: false,
-      });
-    }
-    
-  }
-
+  
   logOut() {
     this.authService.logout(); // Llama al método logout de AuthServiceService aquí
     this.router.navigate(['/login']);

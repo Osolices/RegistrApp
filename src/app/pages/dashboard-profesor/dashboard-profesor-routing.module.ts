@@ -9,7 +9,7 @@ const routes: Routes = [
   },
   
   {
-    path: 'asistencia',
+    path: 'asistencia/:fecha/:id_seccion',
     loadChildren: () => import('./asistencia/asistencia.module').then( m => m.AsistenciaPageModule)
   },
   {
