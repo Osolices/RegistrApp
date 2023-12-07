@@ -9,17 +9,18 @@ const routes: Routes = [
   },
   
   {
-    path: 'asistencia/:fecha/:id_seccion',
-    loadChildren: () => import('./asistencia/asistencia.module').then( m => m.AsistenciaPageModule)
-  },
-  {
     path: 'qr/:descripcion/:nombre/:nro_clase/:fecha/:descripcion/:id_seccion/:id_clase',
     loadChildren: () => import('./qr/qr.module').then( m => m.QrPageModule)
   },
   {
     path: 'detalleramo/:descripcion/:nombre/:horario/:id_seccion',
     loadChildren: () => import('./detalleramo/detalleramo.module').then( m => m.DetalleramoPageModule)
+  },
+  {
+    path: 'asistencia/:id_clase/:fecha',
+    loadChildren: () => import('./asistencia/asistencia.module').then( m => m.AsistenciaPageModule)
   }
+
 ];
 
 @NgModule({

@@ -66,21 +66,28 @@
   <div class="tabla">
     <ion-grid>
       <ion-row class="titulos">
-        <ion-col class="titulos" >Estudiantes Presentes</ion-col>
+        <ion-col class="titulos">Estudiantes Presentes</ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
-          <div *ngFor="let e of estudiantes; let i = index">
-            <div *ngIf="i < 15">{{e.nombre}}</div>
-          </div>
-        </ion-col>
-        <ion-col>
-          <div *ngFor="let e of estudiantes; let i = index">
-            <div *ngIf="i >= 15">{{e.nombre}}</div>
-          </div>
+          <div class="table-container"> <!-- Añade este div -->
+            <table>
+              <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Rut</th>
+              </tr>
+              <tr *ngFor="let e of presentes">
+                <td>{{e.nombre}}</td>
+                <td>{{e.apellido}}</td>
+                <td>{{e.rut}}</td>
+              </tr>
+            </table>
+          </div> <!-- Cierra el div aquí -->
         </ion-col>
       </ion-row>
     </ion-grid>
+    
     <div class="anuncio">
       <ion-item>La lista termina en 20 min</ion-item>
     </div>
@@ -94,8 +101,9 @@
   
   
 </div>
+
 <div class="boton">
-  <button  class="botonqr" expand="full">
+  <button  class="botonqr" expand="full" (click)="finalizar()">
     <img src="../../../../assets/img/finalizar.png" class="icono">
     Finalizar
   </button>

@@ -83,7 +83,7 @@ export class QrpagePage implements OnInit {
   
       console.log('Distancia:', distance);
   
-      if (distance <= 10000) {
+      if (distance <= 1000000) {
         const userData = window.localStorage.getItem('userData');
         if (userData) {
           const rut = JSON.parse(userData).rut_alumno;
@@ -115,7 +115,6 @@ export class QrpagePage implements OnInit {
     if (this.asistencia.length > 0) {
       const rut = this.asistencia[0].rut;
       const clase = this.asistencia[0].id_clase;
-      const seccion=  this.asistencia[0].id_seccion;
       const fecha= this.asistencia[0].fecha;
       const estado= 'Presente';
 
@@ -133,6 +132,7 @@ export class QrpagePage implements OnInit {
         .subscribe(response => {
           console.log(response);
           this.presente('!Estás Presente¡');
+          this.qrRead = false;
         }, error => {
           console.error(error);
           this.presente('Ya estas presente');
@@ -141,6 +141,9 @@ export class QrpagePage implements OnInit {
       console.log('El array asistencia está vacío');
     }
 }
+
+
+
 
 
   presente(mensaje: string) {
@@ -183,5 +186,9 @@ export class QrpagePage implements OnInit {
     console.log('ID SECCION: ', this.seccion_id);
     this.datosUsuario();
     this.isGoogleBarcodeScannerModuleAvailable();
+  }
+
+  finalizar(){
+    this.router.navigate([`/dashboard-alumno`]);
   }
 }

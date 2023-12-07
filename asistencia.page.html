@@ -51,6 +51,7 @@
         <thead class="filas">
           <tr>
             <th scope="col" style="border: 1px solid black;">Nombre alumno</th>
+            <th scope="col" style="border: 1px solid black;text-align: center; width: 20%;">Porcentaje de Asistencia</th>
             <th scope="col" style="border: 1px solid black;text-align: center;">Presente</th>
             <th scope="col" style="border: 1px solid black;text-align: center;">Ausente</th>
             <th scope="col" style="border: 1px solid black;text-align: center;">Justitificado</th>
@@ -58,19 +59,12 @@
         </thead>
         <tbody>
           <tr *ngFor="let e of estudiantesPresentes">
-            <td style="border: 1px solid black;">{{e.nombre}} {{e.apellido}}</td>
-            <td style="border: 1px solid black;text-align: center;">
-              <ion-checkbox [checked]="e.estado === 'Presente'" (ionChange)="handleStateChange(e, 'Presente')"></ion-checkbox>
-            </td>
-            <td style="border: 1px solid black;text-align: center;">
-              <ion-checkbox [checked]="e.estado === 'Ausente'" (ionChange)="handleStateChange(e, 'Ausente')"></ion-checkbox>
-            </td>
-            <td style="border: 1px solid black;text-align: center;">
-              <ion-checkbox [checked]="e.estado === 'Justificado'" (ionChange)="handleStateChange(e, 'Justificado')"></ion-checkbox>
-            </td>
-          </tr>
-             
-          
+            <td style="border: 1px solid black;" [ngStyle]="{'color': e.asistencia < 75 ? 'red' : 'green'}">{{e.nombre}}</td>
+            <td style="border: 1px solid black;text-align: center;" [ngStyle]="{'color': e.asistencia < 75 ? 'red' : 'green'}">{{e.asistencia}}%</td>
+            <td style="border: 1px solid black;text-align: center;"><ion-checkbox [(ngModel)]="e.presente" (ionChange)="e.ausente = false; e.justificado = false;"></ion-checkbox></td>
+            <td style="border: 1px solid black;text-align: center;"><ion-checkbox [(ngModel)]="e.ausente" (ionChange)="e.presente = false; e.justificado = false;"></ion-checkbox></td>
+            <td style="border: 1px solid black;text-align: center;"><ion-checkbox [(ngModel)]="e.justificado" (ionChange)="e.presente = false; e.ausente = false;"></ion-checkbox></td>
+          </tr>          
       </table>
     </div>
   </div>

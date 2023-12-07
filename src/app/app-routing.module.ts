@@ -35,11 +35,7 @@ const routes: Routes = [
     path: 'ajustes',
     loadChildren: () => import('./pages/ajustes/ajustes.module').then( m => m.AjustesPageModule),
     canActivate: [canActivate]
-  },
-
-
-  
-
+  }
 
 ];
 

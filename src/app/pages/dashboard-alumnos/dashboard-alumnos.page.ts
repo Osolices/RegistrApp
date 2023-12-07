@@ -91,5 +91,6 @@ export class DashboardAlumnosPage implements OnInit {
     }
     this.getAsignaturasEstudiante();
   }
+
   
 }

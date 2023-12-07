@@ -5,54 +5,26 @@ import { ToastController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
+interface Alumno {
+  rut: string;
+  nombre: string;
+  apellido: string;
+}
 @Component({
   selector: 'app-asistencia',
   templateUrl: './asistencia.page.html',
   styleUrls: ['./asistencia.page.scss'],
 })
 export class AsistenciaPage implements OnInit {
-
-  estudiantes = history.state.estudiantes;
-  fecha: string = '';
-  id_seccion: number = 0;
-
-  public estudiantes2 = [
-    { rut: '0123456789', nombre: 'Ricardo Silva', presente: false, ausente: false, justificado: false, asistencia: 60 },
-    { rut: '0901234568', nombre: 'Jorge Perez', presente: false, ausente: false, justificado: false, asistencia: 75 },
-    { rut: '1012345678', nombre: 'Veronica Rios', presente: false, ausente: false, justificado: false, asistencia: 60 },
-    { rut: '1012345679', nombre: 'Sandra Gomez', presente: false, ausente: false, justificado: false, asistencia: 75 },
-    { rut: '1123456789', nombre: 'Pablo Herrera', presente: false, ausente: false, justificado: false, asistencia: 75 },
-    { rut: '2123456789', nombre: 'Mauricio Figueroa', presente: false, ausente: false, justificado: false, asistencia: 75 },
-    { rut: '2123456790', nombre: 'Roberto Rodriguez', presente: false, ausente: false, justificado: false, asistencia: 60 },
-    { rut: '2234567890', nombre: 'Daniela Torres', presente: false, ausente: false, justificado: false, asistencia: 75 },
-    { rut: '3234567890', nombre: 'Carolina Vasquez', presente: false, ausente: false, justificado: false, asistencia: 60 },
-    { rut: '3234567901', nombre: 'Susana Vargas', presente: false, ausente: false, justificado: false, asistencia: 75 },
-    { rut: '3345678901', nombre: 'Javier Jara', presente: false, ausente: false, justificado: false, asistencia: 60 },
-    { rut: '4345678901', nombre: 'Felipe Espinoza', presente: false, ausente: false, justificado: false, asistencia: 75 },
-    { rut: '4345679012', nombre: 'Ricardo Herrera', presente: false, ausente: false, justificado: false, asistencia: 60 },
-    { rut: '4456789012', nombre: 'Gabriel Castillo', presente: false, ausente: false, justificado: false, asistencia: 60 },
-    { rut: '5456789012', nombre: 'Claudia Contreras', presente: false, ausente: false, justificado: false, asistencia: 60 },
-    { rut: '5456789123', nombre: 'Cecilia Morales', presente: false, ausente: false, justificado: false, asistencia: 75 },
-    { rut: '5567890123', nombre: 'Carmen Vidal', presente: false, ausente: false, justificado: false, asistencia: 60 },
-    { rut: '6567890123', nombre: 'Guillermo Medina', presente: false, ausente: false, justificado: false, asistencia: 60 },
-    { rut: '6567891234', nombre: 'Hernan Rios', presente: false, ausente: false, justificado: false, asistencia: 75 },
-    { rut: '6678901234', nombre: 'Rodrigo Navarro', presente: false, ausente: false, justificado: false, asistencia: 60 },
-    { rut: '6789012345', nombre: 'Carlos Morales', presente: false, ausente: false, justificado: false, asistencia: 75 },
-    { rut: '7678901234', nombre: 'Paula Hernandez', presente: false, ausente: false, justificado: false, asistencia: 60 },
-    { rut: '7789012345', nombre: 'Monica Alvarez', presente: false, ausente: false, justificado: false, asistencia: 60 },
-    { rut: '7890123456', nombre: 'Patricia Vargas', presente: false, ausente: false, justificado: false, asistencia: 75 },
-    { rut: '8789012346', nombre: 'Eduardo Torres', presente: false, ausente: false, justificado: false, asistencia: 60 },
-    { rut: '8890123456', nombre: 'Hector Tapia', presente: false, ausente: false, justificado: false, asistencia: 60 },
-    { rut: '8901234567', nombre: 'Luis Rojas', presente: false, ausente: false, justificado: false, asistencia: 75 },
-    { rut: '9012345678', nombre: 'Fernanda Muñoz', presente: false, ausente: false, justificado: false, asistencia: 60 },
-    { rut: '9890123457', nombre: 'Isabel Lopez', presente: false, ausente: false, justificado: false, asistencia: 60 },
-    { rut: '9901234567', nombre: 'Sergio Paredes', presente: false, ausente: false, justificado: false, asistencia: 60 }
-];
-
-
   
+ 
+  fecha: string='';
+  id_clase: number=0;
+  estudiantes: any[] = [];
+  presentes: Alumno[] = [];
+  estudiantesPresentes: any =[];
   constructor(private toastController: ToastController, private router: Router, private route: ActivatedRoute, private http: HttpClient) { }
-
+  
   ngAfterViewInit() {
     let element = document.getElementById('navbarToggleExternalContent');
     if (element) {
@@ -61,29 +33,25 @@ export class AsistenciaPage implements OnInit {
       });
     }
   }
+
   ngOnInit() {
+    
+    const navigation = this.router.getCurrentNavigation();
+    if (navigation && navigation.extras && navigation.extras.state) {
+      const state = navigation.extras.state as {estudiantes: any[], presentes: Alumno[]};
+      this.estudiantes = state.estudiantes;
+      this.presentes = state.presentes;
+    }
+    console.log('Estudiantes:', this.estudiantes);
+    console.log('Presentes:', this.presentes);
+    this.compararEstudiantes();
     this.route.params.subscribe((params) => {
       console.log(params); // Imprime todos los parámetros de la ruta
-      this.id_seccion = params['id_seccion'];
-      this.fecha= params['fecha'];
+      this.fecha = params['fecha'];
+      this.id_clase = params['id_clase'];
+      console.log(this.id_clase)
     });
-
-    this.estudiantes2.forEach(e => {
-      e.presente = false;
-      e.ausente = true; // inicialmente marca a todos como ausentes
-      e.justificado = false;
-    });
-    if (this.estudiantes) { // Asegúrate de que this.estudiantes no sea undefined
-      this.estudiantes.forEach((e1: any) => {
-        this.estudiantes2.forEach((e2: any) => {
-          if (e1.nombre === e2.nombre) {
-            e2.presente = true;
-            e2.ausente = false; // si el estudiante está presente, entonces no está ausente
-            e2.justificado = false;
-          }
-        });
-      });
-    }
+    
   }
 
   logOut() {
@@ -103,34 +71,100 @@ export class AsistenciaPage implements OnInit {
       this.router.navigate(['/dashboard-profesor']);
     });
   }
-  registrarAsistencia() {
-    const fecha = new Date().toISOString().split('T')[0]; // Obtiene la fecha actual en formato YYYY-MM-DD
+
+  async compararEstudiantes() {
+    this.estudiantesPresentes = await Promise.all(this.estudiantes.map(async estudiante => {
+      let estado = 'Ausente';
+      for (let presente of this.presentes) {
+        if (estudiante.rut_alumno === presente.rut) {
+          estado = 'Presente';
+          break;
+        }
+      }
   
-    this.estudiantes2.forEach(estudiante => {
-      // Comprueba si el estudiante también está en 'estudiantes'
-      const estaPresente = this.estudiantes.some((e: any) => e.nombre === estudiante.nombre);
+      // Obtén el nombre y apellido del estudiante de la API
+      let nombre = '';
+      let apellido = '';
+      await this.http.get(`https://osolices.pythonanywhere.com/alumnos/${estudiante.rut_alumno}`)
+        .toPromise()
+        .then((data: any) => {
+          nombre = data.nombre;
+          apellido = data.apellido;
+        })
+        .catch(error => console.error(error));
   
-      // Si el estudiante está presente, registra como 'Presente', de lo contrario registra como 'Ausente'
-      const estado = estaPresente ? 'Presente' : 'Ausente';
-  
-      const asistencia = {
-        fecha: fecha,
-        estado: estado,
-        rut_alumno: `https://osolices.pythonanywhere.com/alumnos/${estudiante.rut}/`,
-        id_seccion: `https://osolices.pythonanywhere.com/secciones/${this.id_seccion}/`
+      return {
+        rut_alumno: estudiante.rut_alumno,
+        nombre: nombre,
+        apellido: apellido,
+        estado: estado
       };
-  
-      this.http.post('https://osolices.pythonanywhere.com/asistencias/', asistencia)
-        .subscribe(response => {
-          console.log(response);
-        }, error => {
-          console.error(error);
-        });
-    });
-    this.alerta();
+    }));
+    console.log(this.estudiantesPresentes);
   }
   
+  handleStateChange(e: any, estado: string) {
+    e.estado = estado;
+    console.log(this.estudiantesPresentes);
+  }
   
-
+  async registrarAsistencia() {
+    for (let estudiante of this.estudiantesPresentes) {
+      // Obtén todas las asistencias que corresponden a esta id_clase
+      let asistencias: any[] = [];
+      await this.http.get(`https://osolices.pythonanywhere.com/asistencias/`)
+        .toPromise()
+        .then((data: any) => {
+          asistencias = data;
+        })
+        .catch(error => console.error(error));
+  
+      // Filtra las asistencias para obtener solo las que corresponden a esta id_clase
+      let asistenciasClase = asistencias.filter(asistencia => asistencia.id_clase === `https://osolices.pythonanywhere.com/clases/${this.id_clase}/`);
+  
+      // Comprueba si el estudiante ya existe en la tabla asistencia
+      let existe = false;
+      for (let asistencia of asistenciasClase) {
+        if (asistencia.rut_alumno === `https://osolices.pythonanywhere.com/alumnos/${estudiante.rut_alumno}/`) {
+          existe = true;
+          break;
+        }
+      }
+  
+      // Si el estudiante no existe en la tabla asistencia, realiza el método POST
+      if (!existe) {
+        const body = {
+          rut_alumno: `https://osolices.pythonanywhere.com/alumnos/${estudiante.rut_alumno}/`,
+          id_clase: `https://osolices.pythonanywhere.com/clases/${this.id_clase}/`,
+          fecha: new Date().toISOString().split('T')[0], // Asegúrate de que la fecha esté en el formato correcto
+          estado: estudiante.estado
+        };
+  
+        this.http
+          .post('https://osolices.pythonanywhere.com/asistencias/', body)
+          .subscribe(response => {
+            console.log(response);
+            this.alerta();
+            this.actualizarClase(this.id_clase);
+          }, error => {
+            console.error(error);
+          });
+      }
+    }
+  }
+  
+  actualizarClase(id_clase: number){
+    const body = {
+      estado: true
+    };
+  
+    this.http
+      .put(`https://osolices.pythonanywhere.com/clases/${id_clase}/`, body)
+      .subscribe(response => {
+        console.log(response);
+      }, error => {
+        console.error(error);
+      });
+  }
+  
 }
-

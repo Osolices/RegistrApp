@@ -1,10 +1,23 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 import * as bootstrap from 'bootstrap';
 import { HttpClient } from '@angular/common/http';
 import { AuthServiceService } from './../../../auth-service.service';
 
+interface Asistencia {
+  estado: string;
+  fecha: string;
+  id_asistencia: number;
+  id_clase: string;
+  rut_alumno: string;
+}
+
+interface Alumno {
+  rut: string;
+  nombre: string;
+  apellido: string;
+}
 @Component({
   selector: 'app-qr',
   templateUrl: './qr.page.html',
@@ -18,12 +31,14 @@ export class QrPage implements OnInit, OnDestroy {
   nro_clase: number=0;
   id_clase: number=0;
   intervalId: number = 0;
+  private intervalIdd: any;
   time: number = 0;
   qrData: string = '';
   qrUrl: string='';
   estudiantes: any[] = [];
-  presentes: any[] =[];
+  presentes: Alumno[] = [];
   
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -60,17 +75,21 @@ export class QrPage implements OnInit, OnDestroy {
       this.id_clase= params['id_clase'];
       this.generarQr(this.descripcion, this.nombre, this.id_seccion, this.fecha, this.nro_clase, this.id_clase);
       this.obtenerEstudiantes(this.id_seccion); 
+      this.intervalIdd = setInterval(() => {
+        this.llenarTabla(this.id_clase);}, 10000);
     });
   }
   ngOnDestroy() {
     this.pauseTimer();
+    if (this.intervalIdd) {
+      clearInterval(this.intervalIdd);
+    }
   }
 
   startTimer() {
     this.intervalId = window.setInterval(() => {
       this.time++;
-      console.log(this.time);
-    }, 1000);
+    }, 20000);
   }
   pauseTimer() {
     window.clearInterval(this.intervalId);
@@ -131,7 +150,39 @@ export class QrPage implements OnInit, OnDestroy {
       });
   }
   
-  llenarTabla(){
+  llenarTabla(id_clase: number){
+    console.log(id_clase);
+    this.presentes = [];
+    this.http
+      .get<Asistencia[]>(`https://osolices.pythonanywhere.com/asistencias/`)
+      .subscribe((dataAsistencia: Asistencia[]) => {
+        console.log(dataAsistencia);
+        dataAsistencia.forEach((asistencia: Asistencia) => {
+          this.http
+            .get<Alumno>(asistencia.rut_alumno)
+            .subscribe((alumno: Alumno) => {
+              console.log(`Nombre: ${alumno.nombre}, Apellido: ${alumno.apellido}`);
+              const rut = asistencia.rut_alumno.split('/').slice(-2, -1)[0]; // Extrae solo los números del rut
+              this.presentes.push({
+                rut: rut,
+                nombre: alumno.nombre,
+                apellido: alumno.apellido
+              });
+            });
+        });
+        this.cd.detectChanges(); 
+      });
+}
+
+finalizar(){
+  this.ngOnDestroy();
+  let navigationExtras: NavigationExtras = {
+    state: {
+      estudiantes: this.estudiantes,
+      presentes: this.presentes
+    }
+  };
+  this.router.navigate([`/dashboard-profesor/asistencia`, this.id_clase, this.fecha], navigationExtras);
+}
 
   }
-}
