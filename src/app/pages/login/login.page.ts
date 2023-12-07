@@ -19,7 +19,7 @@ export class LoginPage implements OnInit {
   usuario: string = '';
   pass: string = '';
   profesor: string = '@profesorduoc.cl';
-  alumno: string = '@duoc.cl';
+  alumno: string = '@duocuc.cl';
   constructor(
     private router: Router,
     private toastCtrl: ToastController,

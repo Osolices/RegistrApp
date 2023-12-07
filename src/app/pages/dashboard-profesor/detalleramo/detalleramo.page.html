@@ -46,7 +46,7 @@
       <ion-card-header>
         <ion-card-title>{{nombre}}</ion-card-title>
       <div>
-        <ion-label>{{fecha}}</ion-label>
+        <ion-label>{{fecha2}}</ion-label>
       </div>
       </ion-card-header>
     </div>
@@ -59,8 +59,8 @@
           <ion-col >Fecha</ion-col>
           <ion-col >Estado</ion-col>
         </ion-row>
-        <ion-row *ngFor="let seccion of secciones; let i = index" (click)="selectRow(seccion)" [ngClass]="{'selected': selectedRow === seccion}">
-          <ion-col >{{i + 1}}</ion-col>
+        <ion-row *ngFor="let seccion of secciones;" (click)="selectRow(seccion)" [ngClass]="{'selected': selectedRow === seccion}">
+          <ion-col >{{seccion.nro_clase}}</ion-col>
           <ion-col>{{seccion.fecha}}</ion-col>
           <ion-col>
             <span *ngIf="seccion.estado; else pendiente">Finalizado</span>
@@ -71,7 +71,7 @@
       </ion-grid>
     </div>
     <div class="boton">
-      <button [routerLink]="['/dashboard-profesor/qr', descripcion, nombre, salaId, fecha, descripcion, id_seccion]" class="botonqr" expand="full" [disabled]="selectedRow.estado || fecha != selectedRow.fecha" >
+      <button [routerLink]="['/dashboard-profesor/qr', descripcion, nombre, selectedRow.nro_clase, fecha2, descripcion, id_seccion, selectedRow.id_clase]" class="botonqr" expand="full" [disabled]="selectedRow.estado || fecha2 != selectedRow.fecha" >
         <img src="../../../../assets/img/qr.png" class="icono">
         Generar QR
       </button>

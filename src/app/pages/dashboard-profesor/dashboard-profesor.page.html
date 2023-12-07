@@ -91,7 +91,7 @@
 
   <ion-content class="fondo">
     <ng-template ngFor let-c [ngForOf]="secciones">
-      <ion-card [routerLink]="['/dashboard-profesor/detalleramo', c.descripcion, c.nombre, c.horario, c.id_seccion, c.salaId]" *ngIf="selectedDay === 'todos' || c.dia.toLowerCase() === selectedDay">
+      <ion-card [routerLink]="['/dashboard-profesor/detalleramo', c.descripcion, c.nombre, c.horario, c.id_seccion]" *ngIf="selectedDay === 'todos' || c.dia.toLowerCase() === selectedDay">
 
         <div class="card-content">
           <div class="color-line" style="background-color: {{c.color}};"></div>

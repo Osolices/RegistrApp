@@ -17,9 +17,11 @@ export class DetalleramoPage implements OnInit {
   nombre: string = '';
   horario: string = '';
   selectedRow: any = { estado: false };
-  fecha: string = '';
+  fecha2: string = '';
   id_seccion: number = 0;
-  salaId: number = 0;
+  nro_clase:number =0;
+  id_clase: number =0;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -46,10 +48,10 @@ export class DetalleramoPage implements OnInit {
       this.descripcion = params['descripcion'];
       this.nombre = params['nombre'];
       this.horario = params['horario'];
-      this.fecha = this.getCurrentDate();
+      this.fecha2 = this.getCurrentDate();
       this.id_seccion = params['id_seccion'];
       this.getClasessProfesor(this.id_seccion);
-      this.salaId = params['salaId'];
+
     });
   }
   selectRow(seccion: any) {

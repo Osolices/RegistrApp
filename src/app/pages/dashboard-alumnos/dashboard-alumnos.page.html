@@ -80,9 +80,9 @@
             </ion-card-content>
           </div>
           <div class="boton">
-          <ion-button *ngIf="!seccion.expanded" class="botonqr" fill="clear" (click)="irQR()">
-            <img src="./../../../assets/img/qr.png" class="qr">
-          </ion-button>
+            <ion-button *ngIf="!seccion.expanded" class="botonqr" fill="clear" [routerLink]="['/qrpage', seccion.id_seccion]">
+              <img src="./../../../assets/img/qr.png" class="qr">
+            </ion-button>            
         </div>
         </div>
       </ion-card>

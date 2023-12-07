@@ -7,14 +7,29 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="fondo">
+  <div class="logo"><img src="../../../assets/img/Logo1.png" alt=""></div>
   <div class="contenedor">
-    <img src="../../../assets/img/lector-qr.png" class="lector">
+
+
+    <div class="card">
+      <ul>
+        <li>Nombre: {{usuario.nombre}}</li>
+        <li>Apellido: {{usuario.apellido}}</li>
+        <li>RUT: {{usuario.rut}}</li>
+        <li>Asignatura: {{qrData1.nombre}}</li>
+        <li>Sección: {{qrData1.descripcion}}</li>
+        <li>Fecha: {{qrData1.fecha}}</li>
+      </ul>
+    </div>
   </div>
 
+  <div class="boton">
+    <button class="botonpresente" [disabled]="!qrRead" (click)="registrarAsistencia()">Presente</button>
+  </div>
+  
   <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-    <ion-fab-button id="open-toast" expand="block" color="warning" (click)="goToDash()">
+    <ion-fab-button class="qr" id="open-toast" expand="block" color="warning" (click)="scanQR()">
       <ion-icon name="camera"></ion-icon>
     </ion-fab-button>
-    <ion-toast trigger="open-toast" message="¡Estás presente!" [duration]="2500"></ion-toast>
   </ion-fab>
 </ion-content>

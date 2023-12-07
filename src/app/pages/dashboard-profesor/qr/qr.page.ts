@@ -12,34 +12,18 @@ import { AuthServiceService } from './../../../auth-service.service';
 })
 export class QrPage implements OnInit, OnDestroy {
   nombre: string = '';
-  salaId: number = 0;
   fecha: string = '';
   descripcion: string = '';
   id_seccion: number = 0;
+  nro_clase: number=0;
+  id_clase: number=0;
   intervalId: number = 0;
   time: number = 0;
   qrData: string = '';
   qrUrl: string='';
-
-  public estudiantes = [
-    { rut: '0123456789', nombre: 'Ricardo Silva' },
-    { rut: '0901234568', nombre: 'Jorge Perez' },
-    { rut: '1012345678', nombre: 'Veronica Rios' },
-    { rut: '1012345679', nombre: 'Sandra Gomez' },
-    { rut: '1123456789', nombre: 'Pablo Herrera' },
-    { rut: '2123456789', nombre: 'Mauricio Figueroa' },
-    { rut: '2123456790', nombre: 'Roberto Rodriguez' },
-    { rut: '2234567890', nombre: 'Daniela Torres' },
-    { rut: '3234567890', nombre: 'Carolina Vasquez' },
-    { rut: '3234567901', nombre: 'Susana Vargas' },
-    { rut: '3345678901', nombre: 'Javier Jara' },
-    { rut: '4345678901', nombre: 'Felipe Espinoza' },
-    { rut: '4345679012', nombre: 'Ricardo Herrera' },
-    { rut: '4456789012', nombre: 'Gabriel Castillo' },
-    { rut: '5456789012', nombre: 'Claudia Contreras' }
-];
-
-
+  estudiantes: any[] = [];
+  presentes: any[] =[];
+  
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -71,18 +55,15 @@ export class QrPage implements OnInit, OnDestroy {
       this.descripcion = params['descripcion'];
       this.nombre = params['nombre'];
       this.id_seccion = params['id_seccion'];
-      this.salaId = params['salaId'];
       this.fecha= params['fecha'];
-      this.generarQr(this.descripcion, this.nombre, this.id_seccion, this.salaId, this.fecha);
+      this.nro_clase= params['nro_clase'];
+      this.id_clase= params['id_clase'];
+      this.generarQr(this.descripcion, this.nombre, this.id_seccion, this.fecha, this.nro_clase, this.id_clase);
+      this.obtenerEstudiantes(this.id_seccion); 
     });
   }
   ngOnDestroy() {
     this.pauseTimer();
-  }
-  irDash(fecha: string, id_seccion: number) {
-    this.router.navigateByUrl(`/dashboard-profesor/asistencia/${fecha}/${id_seccion}`, {
-      state: { estudiantes: this.estudiantes },
-    });
   }
 
   startTimer() {
@@ -111,15 +92,16 @@ export class QrPage implements OnInit, OnDestroy {
     });
   };
   
-  async generarQr(descripcion: string, nombre: string, id_seccion: number, salaId: number, fecha: string) {
+  async generarQr(descripcion: string, nombre: string, id_seccion: number, fecha: string, nro_clase: number, id_clase:number) {
     try {
       const coords = await this.ubicacionActual();
       let qrData = {
         descripcion: descripcion,
         nombre: nombre,
         id_seccion: id_seccion,
-        salaId: salaId,
         fecha: fecha,
+        nro_clase: nro_clase,
+        id_clase: id_clase,
         latitud: coords.lat,
         longitud: coords.lon
       };
@@ -127,5 +109,29 @@ export class QrPage implements OnInit, OnDestroy {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  obtenerEstudiantes(id_seccion: number,) {
+    console.log(id_seccion);
+    this.http
+      .get(`https://osolices.pythonanywhere.com/alumno_seccion/`)
+      .subscribe((dataAlumnos: any) => {
+        console.log(dataAlumnos);
+        if (dataAlumnos) {
+          const estudiantesSeccion: any[] = [];
+          dataAlumnos.forEach((alumno: any) => {
+            if (Number(alumno.id_seccion) === Number(id_seccion)) {
+              estudiantesSeccion.push(alumno);
+            }
+          });
+          console.log(estudiantesSeccion);
+          this.estudiantes = estudiantesSeccion; // Asigna el array estudiantesSeccion a la propiedad estudiantes de la clase
+          this.cd.detectChanges(); // Llama al método detectChanges() para actualizar la vista
+        }
+      });
+  }
+  
+  llenarTabla(){
+
   }
 }

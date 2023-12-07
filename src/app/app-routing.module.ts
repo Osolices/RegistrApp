@@ -27,7 +27,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/splash/splash.module').then( m => m.SplashPageModule)
   },
   {
-    path: 'qrpage',
+    path: 'qrpage/:id_seccion',
     loadChildren: () => import('./pages/qrpage/qrpage.module').then( m => m.QrpagePageModule),
     canActivate: [canActivate]
   },
